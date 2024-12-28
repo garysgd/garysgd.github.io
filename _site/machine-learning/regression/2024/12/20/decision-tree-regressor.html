@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Building a Simple Decision Tree Regressor from Scratch | if: Learn</title>
+<meta name="generator" content="Jekyll v4.3.3" />
+<meta property="og:title" content="Building a Simple Decision Tree Regressor from Scratch" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="#ifthenlearn" />
+<meta property="og:description" content="#ifthenlearn" />
+<link rel="canonical" href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" />
+<meta property="og:url" content="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" />
+<meta property="og:site_name" content="if: Learn" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-12-20T00:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Building a Simple Decision Tree Regressor from Scratch" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-12-20T00:00:00+08:00","datePublished":"2024-12-20T00:00:00+08:00","description":"#ifthenlearn","headline":"Building a Simple Decision Tree Regressor from Scratch","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"},"url":"http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="if: Learn" /><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
+
+</head>
+<body><header class="site-header" role="banner">
+  <div class="wrapper"><a class="site-title" rel="author" href="/">if: Learn</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 
+                h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 
+                c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 
+                C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Building a Simple Decision Tree Regressor from Scratch</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2024-12-20T00:00:00+08:00" itemprop="datePublished">Dec 20, 2024
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>#ifthenlearn</p>
+
+<p>Most people learning data science would be aware of tree based learning methods like xgboost.
+Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even outperform neural networks when dealing with tabular/structured data. [https://arxiv.org/pdf/2207.08815].</p>
+
+<p>Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self attention for seq2seq models or convolutions for images.
+Tabular data still forms a large part of most companies data source and building models that leverage such data can yield great value through recommendation systems and targeted marketing campaigns.</p>
+
+<p>I have always been interested in learning about the inner workings of such tree based methods, and will explain while learning about them, starting with the decision tree regressor which is the foundation for tree based methods.</p>
+
+<p>Before diving in to decision tree regressors, what is a regressor? A regressor is a trained model that learns a function which returns or outputs a continuous variable based on a given input. For example, a regressor can learn a simple linear function y = 2x. Inputting a value of 5 to this regressor would yield a value of 10 as the target output.</p>
+
+<hr />
+
+<h2 id="overview">Overview</h2>
+
+<p>How do we estimate a function? Given a set of training data inputs X and label y we can assign mean(y) for any value of X.</p>
+
+\[f(x) = mean(y)\]
+
+<p>We can extend this further to apply thresholds at certain values of \(x\) where</p>
+
+\[f(x&lt;n) = mean(y\mid x &lt;n)\]
+
+<p><img src="/images/binarytree.jpg" alt="Alt text" /></p>
+
+<p>This can be also be illustrated with the binary tree above, where the threshold n=0. If x is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: \(y = \frac{1}{1 + e^{-x}}\).</p>
+
+<p><img src="/images/scatter.jpg" alt="An example image" /></p>
+
+<p>From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth = 1 we can see a threshold at x=0 and gradually see that the</p>
+
+<hr />
+
+<h2 id="code-explained">Code Explained</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="k">else</span> <span class="mf">0.0</span>
+
+<span class="k">def</span> <span class="nf">variance</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">sum</span><span class="p">((</span><span class="n">i</span> <span class="o">-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.0</span>
+</code></pre></div></div>
+
+<p>Before going through the decision tree regressor line by line we first define two helper functions to obtain the mean and variance. Mean is used to determine the approximate value at each threshold, while variance (also known as mean square error) determines which threshold we use.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">root</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="p">[{</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">root</span><span class="p">}]</span>
+
+<span class="n">current</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+<span class="n">Xc</span><span class="p">,</span> <span class="n">yc</span> <span class="o">=</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">],</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">]</span>
+<span class="n">depth</span><span class="p">,</span> <span class="n">node</span> <span class="o">=</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">],</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">]</span>
+
+<span class="nf">if </span><span class="p">(</span><span class="n">depth</span> <span class="o">==</span> <span class="n">max_depth</span>
+    <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_samples_split</span>
+    <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">yc</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean_val</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+    <span class="k">continue</span>
+</code></pre></div></div>
+<p>We initialize root, which is the top node of the decision tree, and stack, which keeps track of the nodes of the decision tree and their associated depths. When the maximum depth is reached or the target values at a node contain only one unique value, the mean of the target values is assigned as the node’s value.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parent_var</span> <span class="o">=</span> <span class="nf">variance</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+<span class="n">best_feat</span><span class="p">,</span> <span class="n">best_thresh</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+<span class="n">best_gain</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">-inf</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Next we let the existing variance before splitting be the variance of all the labels for that parent node. We also initialise the best input feature, best threshold and best gain. Gain would be a measure and decider on whether to use a certain input index as a threshold.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">Xc</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">Xc</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">thresholds</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">({</span><span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">Xc</span><span class="p">})</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+            <span class="n">left_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">]</span>
+            <span class="n">right_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">]</span>
+
+            <span class="c1"># If one side is empty, ignore this split
+</span>            <span class="k">if</span> <span class="ow">not</span> <span class="n">left_y</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">right_y</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">w</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">left_y</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+            <span class="n">child_var</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="nf">variance</span><span class="p">(</span><span class="n">left_y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="nf">variance</span><span class="p">(</span><span class="n">right_y</span><span class="p">)</span>
+            <span class="n">gain</span> <span class="o">=</span> <span class="n">parent_var</span> <span class="o">-</span> <span class="n">child_var</span>
+
+            <span class="k">if</span> <span class="n">gain</span> <span class="o">&gt;</span> <span class="n">best_gain</span><span class="p">:</span>
+                <span class="n">best_gain</span> <span class="o">=</span> <span class="n">gain</span>
+                <span class="n">best_feat</span> <span class="o">=</span> <span class="n">f</span>
+                <span class="n">best_thresh</span> <span class="o">=</span> <span class="n">t</span>
+</code></pre></div></div>
+<p>If the input set Xc is not empty, we iterate across all possible features and all input indices for that feature. For a data with 1-dimensional input features we simply iterate across all indices.
+The input indices which results in the best gain would be kept as the thresholds.</p>
+
+<p>Gain is defined as the difference between the variance of the target variables before the split and the weighted sum of the variance after the split.</p>
+
+\[\text{Gain} = \sigma^2_{\text{parent}} - \left( \frac{N_L}{N} \cdot \sigma^2_L + \frac{N_R}{N} \cdot \sigma^2_R \right)\]
+
+<p>Intuitively this means that the variance, also known as the mean square error is reduced compared to before the threshold was applied.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">best_feat</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">best_gain</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean_val</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+    <span class="k">continue</span>
+
+<span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">feature</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_feat</span>
+<span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">threshold</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_thresh</span>
+</code></pre></div></div>
+<p>If no split is found that reduces gain, we let that node be a leaf. If the gain is reduced, we save the best features and threshold recorded.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">best_feat</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">best_thresh</span><span class="p">:</span>
+        <span class="n">left_X</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">left_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">right_X</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="n">right_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Push stack to be processed next
+</span><span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">left_X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">left_y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">]})</span>
+<span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">right_X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">right_y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">]})</span>
+</code></pre></div></div>
+<p>Finally, we update the tree with the new threshold found and split the tree according to the new threshold. We record this into the stack.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">train_tree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[{</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">root</span><span class="p">}]</span>
+
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="nf">pop</span><span class="p">()</span>
+        <span class="n">Xc</span><span class="p">,</span> <span class="n">yc</span> <span class="o">=</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">],</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">]</span>
+        <span class="n">depth</span><span class="p">,</span> <span class="n">node</span> <span class="o">=</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">],</span> <span class="n">current</span><span class="p">[</span><span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">]</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">node</span><span class="p">,</span><span class="sh">'</span><span class="s">node</span><span class="sh">'</span><span class="p">)</span>
+        <span class="c1"># Stopping conditions: depth reached, insufficient samples, or all targets identical
+</span>        <span class="nf">if </span><span class="p">(</span><span class="n">depth</span> <span class="o">==</span> <span class="n">max_depth</span>
+            <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_samples_split</span>
+            <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">yc</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Compute parent variance for this node
+</span>        <span class="n">parent_var</span> <span class="o">=</span> <span class="nf">variance</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+
+        <span class="c1"># Find best split across all features/thresholds
+</span>        <span class="n">best_feat</span><span class="p">,</span> <span class="n">best_thresh</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span>
+        <span class="n">best_gain</span> <span class="o">=</span> <span class="nf">float</span><span class="p">(</span><span class="sh">"</span><span class="s">-inf</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="c1"># If Xc is empty, skip
+</span>        <span class="k">if</span> <span class="n">Xc</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">Xc</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="n">thresholds</span> <span class="o">=</span> <span class="nf">sorted</span><span class="p">({</span><span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">Xc</span><span class="p">})</span>
+                <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">thresholds</span><span class="p">:</span>
+                    <span class="n">left_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">]</span>
+                    <span class="n">right_y</span> <span class="o">=</span> <span class="p">[</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">t</span><span class="p">]</span>
+
+                    <span class="c1"># If one side is empty, ignore this split
+</span>                    <span class="k">if</span> <span class="ow">not</span> <span class="n">left_y</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">right_y</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">w</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">left_y</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+                    <span class="n">child_var</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="nf">variance</span><span class="p">(</span><span class="n">left_y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">*</span> <span class="nf">variance</span><span class="p">(</span><span class="n">right_y</span><span class="p">)</span>
+                    <span class="n">gain</span> <span class="o">=</span> <span class="n">parent_var</span> <span class="o">-</span> <span class="n">child_var</span>
+
+                    <span class="k">if</span> <span class="n">gain</span> <span class="o">&gt;</span> <span class="n">best_gain</span><span class="p">:</span>
+                        <span class="n">best_gain</span> <span class="o">=</span> <span class="n">gain</span>
+                        <span class="n">best_feat</span> <span class="o">=</span> <span class="n">f</span>
+                        <span class="n">best_thresh</span> <span class="o">=</span> <span class="n">t</span>
+
+        <span class="c1"># If no meaningful split was found, make this node a leaf
+</span>        <span class="k">if</span> <span class="n">best_feat</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">best_gain</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># Record the chosen feature &amp; threshold
+</span>        <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">feature</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_feat</span>
+        <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">threshold</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_thresh</span>
+
+        <span class="c1"># Partition data into left/right subsets
+</span>        <span class="n">left_X</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">left_y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">right_X</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">right_y</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nf">enumerate</span><span class="p">(</span><span class="n">Xc</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="n">best_feat</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">best_thresh</span><span class="p">:</span>
+                <span class="n">left_X</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="n">left_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right_X</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                <span class="n">right_y</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">yc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="c1"># Initialize child nodes
+</span>        <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># Push them to be processed next
+</span>        <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">left_X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">left_y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">]})</span>
+        <span class="n">stack</span><span class="p">.</span><span class="nf">append</span><span class="p">({</span><span class="sh">"</span><span class="s">X</span><span class="sh">"</span><span class="p">:</span> <span class="n">right_X</span><span class="p">,</span> <span class="sh">"</span><span class="s">y</span><span class="sh">"</span><span class="p">:</span> <span class="n">right_y</span><span class="p">,</span> <span class="sh">"</span><span class="s">depth</span><span class="sh">"</span><span class="p">:</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">node</span><span class="sh">"</span><span class="p">:</span> <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">]})</span>
+
+    <span class="k">return</span> <span class="n">root</span>
+</code></pre></div></div>
+
+<p>We can combine this all we just discussed into a function train_tree that iterates recursively until the stopping criteria is reached. Where the stopping criteria is defined as max depth of tree, insufficient samples or identical targets at a node.</p>
+
+<h2 id="example-implementation">Example Implementation</h2>
+<p>We can implement this on a simple example with input data X as some discrete values and target variable y as the sigmoid function applied to X.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.01</span><span class="o">*</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> 
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="p">.</span><span class="nf">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">]</span> 
+<span class="n">tree</span> <span class="o">=</span> <span class="nf">train_tree</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="p">{</span><span class="sh">'</span><span class="s">feature</span><span class="sh">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">threshold</span><span class="sh">'</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="sh">'</span><span class="s">left</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.21409955507181783</span><span class="p">},</span> <span class="sh">'</span><span class="s">right</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.7849506095629721</span><span class="p">}}</span>
+</code></pre></div></div>
+
+<p>By training the tree on a sigmoid distribution with depth=1, we can see that the threshold of \(-0.01 \approx 0\) which is denoted by the green line in our earlier plot as the sigmoid function is symmetric. This acts as a sanity test and also shows the structure of the decision tree regressor as well as how it works after training. If the input value is less than the threshold the model will return the left value, and the right value otherwise.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
+    <span class="c1"># If this node is a leaf, return its value
+</span>    <span class="k">if</span> <span class="sh">"</span><span class="s">value</span><span class="sh">"</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span>
+    
+    <span class="c1"># Otherwise, compare the sample's feature to the threshold
+</span>    <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">feature</span><span class="sh">"</span><span class="p">]]</span> <span class="o">&lt;=</span> <span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">threshold</span><span class="sh">"</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">left</span><span class="sh">"</span><span class="p">],</span> <span class="n">sample</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">],</span> <span class="n">sample</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can write a predict above to</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">])</span>
+<span class="mf">0.21409955507181783</span>
+<span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">])</span>
+<span class="mf">0.7849506095629721</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/machine-learning/regression/2024/12/20/decision-tree-regressor.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+    <div class="wrapper">
+      <div class="footer-col-wrapper">
+        <div class="footer-col">
+          <p>Exploring Machine Learning and Theoretical Work</p>
+        </div>
+      </div>
+    </div>
+  </footer></body>
+
+</html>

@@ -1,0 +1,21 @@
+title: "if: Learn"
+description: "Exploring Machine Learning and Theoretical Work"
+baseurl: ""
+url: "https://username.github.io"
+
+# Markdown & Highlighter settings
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  mathjax:
+    inline_math: ['$', '$']
+    display_math: ['$$', '$$']
+
+# Where Jekyll looks for posts
+collections:
+  posts:
+    output: true
+
+# Build settings
+theme: minima
+plugins: []
