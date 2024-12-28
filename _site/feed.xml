@@ -1,12 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-12-28T17:13:37+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work</subtitle><entry><title type="html">Building a Simple Decision Tree Regressor from Scratch</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Building a Simple Decision Tree Regressor from Scratch" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>#ifthenlearn</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-12-28T18:34:11+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work</subtitle><entry><title type="html">Decision Tree Regressors from Scratch</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Decision Tree Regressors from Scratch" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>Most people practicing data science would be aware of tree based learning methods like XGBoost.
+Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even <a href="https://arxiv.org/pdf/2207.08815">outperform neural networks</a> when dealing with tabular/structured data.</p>
 
-<p>Most people learning data science would be aware of tree based learning methods like xgboost.
-Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even outperform neural networks when dealing with tabular/structured data. [https://arxiv.org/pdf/2207.08815].</p>
+<p>Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self-attention for seq2seq models or convolutions for images.
+Tabular data still forms a large part of most companies’ data source and building models that leverage such data can yield great value through recommendation systems and targeted marketing campaigns.</p>
 
-<p>Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self attention for seq2seq models or convolutions for images.
-Tabular data still forms a large part of most companies data source and building models that leverage such data can yield great value through recommendation systems and targeted marketing campaigns.</p>
-
-<p>I have always been interested in learning about the inner workings of such tree based methods, and will explain while learning about them, starting with the decision tree regressor which is the foundation for tree based methods.</p>
+<p>I have always been interested in learning about the inner workings of such tree based methods, and will explain them in detail, starting with the decision tree regressor which is the foundation for tree based methods. While learning and writing on this topic I came across and was inspired by a useful <a href="https://randomrealizations.com/">blog</a> that helped me gain an intuitive understanding on these methods.</p>
 
 <p>Before diving in to decision tree regressors, what is a regressor? A regressor is a trained model that learns a function which returns or outputs a continuous variable based on a given input. For example, a regressor can learn a simple linear function y = 2x. Inputting a value of 5 to this regressor would yield a value of 10 as the target output.</p>
 
@@ -24,11 +22,11 @@ Tabular data still forms a large part of most companies data source and building
 
 <p><img src="/images/binarytree.jpg" alt="Alt text" /></p>
 
-<p>This can be also be illustrated with the binary tree above, where the threshold n=0. If x is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: \(y = \frac{1}{1 + e^{-x}}\).</p>
+<p>This can also be illustrated with the binary tree above, where the threshold n=0. If \(x\) is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: \(y = \frac{1}{1 + e^{-x}}\).</p>
 
 <p><img src="/images/scatter.jpg" alt="An example image" /></p>
 
-<p>From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth = 1 we can see a threshold at x=0 and gradually see that the</p>
+<p>From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth=1 we can see a threshold at \(x=0\) and gradually see our model increasingly fit the sigmoid function with increasing depth.</p>
 
 <hr />
 
@@ -54,7 +52,7 @@ Tabular data still forms a large part of most companies data source and building
 <span class="nf">if </span><span class="p">(</span><span class="n">depth</span> <span class="o">==</span> <span class="n">max_depth</span>
     <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="n">Xc</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_samples_split</span>
     <span class="ow">or</span> <span class="nf">len</span><span class="p">(</span><span class="nf">set</span><span class="p">(</span><span class="n">yc</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean_val</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
     <span class="k">continue</span>
 </code></pre></div></div>
 <p>We initialize root, which is the top node of the decision tree, and stack, which keeps track of the nodes of the decision tree and their associated depths. When the maximum depth is reached or the target values at a node contain only one unique value, the mean of the target values is assigned as the node’s value.</p>
@@ -95,7 +93,7 @@ The input indices which results in the best gain would be kept as the thresholds
 <p>Intuitively this means that the variance, also known as the mean square error is reduced compared to before the threshold was applied.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">best_feat</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">best_gain</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean_val</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
+    <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">value</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">yc</span><span class="p">)</span>
     <span class="k">continue</span>
 
 <span class="n">node</span><span class="p">[</span><span class="sh">"</span><span class="s">feature</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">best_feat</span>
@@ -210,7 +208,7 @@ The input indices which results in the best gain would be kept as the thresholds
 <span class="p">{</span><span class="sh">'</span><span class="s">feature</span><span class="sh">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="sh">'</span><span class="s">threshold</span><span class="sh">'</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="sh">'</span><span class="s">left</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.21409955507181783</span><span class="p">},</span> <span class="sh">'</span><span class="s">right</span><span class="sh">'</span><span class="p">:</span> <span class="p">{</span><span class="sh">'</span><span class="s">value</span><span class="sh">'</span><span class="p">:</span> <span class="mf">0.7849506095629721</span><span class="p">}}</span>
 </code></pre></div></div>
 
-<p>By training the tree on a sigmoid distribution with depth=1, we can see that the threshold of \(-0.01 \approx 0\) which is denoted by the green line in our earlier plot as the sigmoid function is symmetric. This acts as a sanity test and also shows the structure of the decision tree regressor as well as how it works after training. If the input value is less than the threshold the model will return the left value, and the right value otherwise.</p>
+<p>By training the tree on a sigmoid distribution with depth=1, we can see that the threshold of \(-0.01 \approx 0\) which is denoted by the green line in our earlier plot as the sigmoid function is symmetric. This acts as a sanity test and also shows the structure of the decision tree regressor as well as how it works after training. If the input value is less than the threshold, the model will return the left value, and the right value otherwise.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
     <span class="c1"># If this node is a leaf, return its value
@@ -224,10 +222,21 @@ The input indices which results in the best gain would be kept as the thresholds
         <span class="k">return</span> <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="sh">"</span><span class="s">right</span><span class="sh">"</span><span class="p">],</span> <span class="n">sample</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>We can write a predict above to</p>
+<p>We can write a predict function above to recursively propagate the input value across the branches of the tree till it reaches a node.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">7</span><span class="p">])</span>
 <span class="mf">0.21409955507181783</span>
 <span class="nf">predict</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">])</span>
 <span class="mf">0.7849506095629721</span>
-</code></pre></div></div>]]></content><author><name></name></author><category term="machine-learning" /><category term="regression" /><category term="decision-trees" /><category term="python" /><summary type="html"><![CDATA[#ifthenlearn]]></summary></entry></feed>
+</code></pre></div></div>
+
+<p>Using positive and negative values for a simple trained tree depth=1 we can the different predicted values depending on whether the input is above or below the threshold we have derived.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Decision tree regressors offer an intuitive way to model continuous target values through sequential splitting on feature thresholds. By measuring the reduction in variance (or mean squared error) at each potential split, we iteratively build a tree that partitions the input space into regions with relatively homogeneous target values. While simple to conceptualise and implement, this foundation underpins more sophisticated models commonly used in data science, such as gradient boosted machines and xgboost. With an understanding of how a single decision tree regressor is constructed, we can have a greater appreciation of these models beyond viewing them as sklearn functions or blackboxes.</p>
+
+<h2 id="references">References</h2>
+<ol>
+  <li><a href="https://arxiv.org/pdf/2207.08815">Why do tree-based models still outperform deep learning on tabular data?</a></li>
+  <li><a href="https://randomrealizations.com/posts/gradient-boosting-machine-from-scratch/">How to Build a Gradient Boosting Machine from Scratch</a></li>
+</ol>]]></content><author><name></name></author><category term="machine-learning" /><category term="regression" /><category term="decision-trees" /><category term="python" /><summary type="html"><![CDATA[Most people practicing data science would be aware of tree based learning methods like XGBoost. Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even outperform neural networks when dealing with tabular/structured data.]]></summary></entry></feed>

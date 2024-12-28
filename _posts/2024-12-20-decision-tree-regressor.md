@@ -1,19 +1,19 @@
 ---
 layout: post
-title: "Building a Simple Decision Tree Regressor from Scratch"
+title: "Decision Tree Regressors from Scratch"
+subtitle: "The foundation of data science and tree based methods"
 date: 2024-12-20
 categories: [machine-learning, regression]
 tags: [decision-trees, python]
 ---
-#ifthenlearn
 
-Most people learning data science would be aware of tree based learning methods like xgboost.
-Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even outperform neural networks when dealing with tabular/structured data. [https://arxiv.org/pdf/2207.08815]. 
+Most people practicing data science would be aware of tree based learning methods like XGBoost.
+Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even [outperform neural networks](https://arxiv.org/pdf/2207.08815) when dealing with tabular/structured data. 
 
-Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self attention for seq2seq models or convolutions for images.
-Tabular data still forms a large part of most companies data source and building models that leverage such data can yield great value through recommendation systems and targeted marketing campaigns. 
+Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self-attention for seq2seq models or convolutions for images.
+Tabular data still forms a large part of most companies' data source and building models that leverage such data can yield great value through recommendation systems and targeted marketing campaigns. 
 
-I have always been interested in learning about the inner workings of such tree based methods, and will explain while learning about them, starting with the decision tree regressor which is the foundation for tree based methods.
+I have always been interested in learning about the inner workings of such tree based methods, and will explain them in detail, starting with the decision tree regressor which is the foundation for tree based methods. While learning and writing on this topic I came across and was inspired by a useful [blog](https://randomrealizations.com/) that helped me gain an intuitive understanding on these methods.
 
 Before diving in to decision tree regressors, what is a regressor? A regressor is a trained model that learns a function which returns or outputs a continuous variable based on a given input. For example, a regressor can learn a simple linear function y = 2x. Inputting a value of 5 to this regressor would yield a value of 10 as the target output.
 
@@ -31,11 +31,11 @@ $$f(x<n) = mean(y\mid x <n)$$
 
 ![Alt text](/images/binarytree.jpg)
 
-This can be also be illustrated with the binary tree above, where the threshold n=0. If x is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: $$y = \frac{1}{1 + e^{-x}}$$.
+This can also be illustrated with the binary tree above, where the threshold n=0. If $$x$$ is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: $$y = \frac{1}{1 + e^{-x}}$$.
 
 ![An example image](/images/scatter.jpg)
 
-From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth = 1 we can see a threshold at x=0 and gradually see that the 
+From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth=1 we can see a threshold at $$x=0$$ and gradually see our model increasingly fit the sigmoid function with increasing depth.
 
 ---
 
@@ -63,7 +63,7 @@ depth, node = current["depth"], current["node"]
 if (depth == max_depth
     or len(Xc) < min_samples_split
     or len(set(yc)) == 1):
-    node["value"] = mean_val(yc)
+    node["value"] = mean(yc)
     continue
 ```
 We initialize root, which is the top node of the decision tree, and stack, which keeps track of the nodes of the decision tree and their associated depths. When the maximum depth is reached or the target values at a node contain only one unique value, the mean of the target values is assigned as the node's value.
@@ -109,7 +109,7 @@ Intuitively this means that the variance, also known as the mean square error is
 
 ```python
 if best_feat is None or best_gain <= 0:
-    node["value"] = mean_val(yc)
+    node["value"] = mean(yc)
     continue
 
 node["feature"] = best_feat
@@ -227,7 +227,7 @@ print(tree)
 {'feature': 0, 'threshold': -0.01, 'left': {'value': 0.21409955507181783}, 'right': {'value': 0.7849506095629721}}
 ```
 
-By training the tree on a sigmoid distribution with depth=1, we can see that the threshold of $$-0.01 \approx 0$$ which is denoted by the green line in our earlier plot as the sigmoid function is symmetric. This acts as a sanity test and also shows the structure of the decision tree regressor as well as how it works after training. If the input value is less than the threshold the model will return the left value, and the right value otherwise.
+By training the tree on a sigmoid distribution with depth=1, we can see that the threshold of $$-0.01 \approx 0$$ which is denoted by the green line in our earlier plot as the sigmoid function is symmetric. This acts as a sanity test and also shows the structure of the decision tree regressor as well as how it works after training. If the input value is less than the threshold, the model will return the left value, and the right value otherwise.
 
 ```python
 def predict(tree, sample):
@@ -242,7 +242,7 @@ def predict(tree, sample):
         return predict(tree["right"], sample)
 ```
 
-We can write a predict above to 
+We can write a predict function above to recursively propagate the input value across the branches of the tree till it reaches a node.
 
 ```python
 predict(tree, [-7])
@@ -250,3 +250,12 @@ predict(tree, [-7])
 predict(tree, [7])
 0.7849506095629721
 ```
+
+Using positive and negative values for a simple trained tree depth=1 we can the different predicted values depending on whether the input is above or below the threshold we have derived.
+
+## Conclusion
+Decision tree regressors offer an intuitive way to model continuous target values through sequential splitting on feature thresholds. By measuring the reduction in variance (or mean squared error) at each potential split, we iteratively build a tree that partitions the input space into regions with relatively homogeneous target values. While simple to conceptualise and implement, this foundation underpins more sophisticated models commonly used in data science, such as gradient boosted machines and xgboost. With an understanding of how a single decision tree regressor is constructed, we can have a greater appreciation of these models beyond viewing them as sklearn functions or blackboxes. 
+
+## References
+1. [Why do tree-based models still outperform deep learning on tabular data?](https://arxiv.org/pdf/2207.08815)
+2. [How to Build a Gradient Boosting Machine from Scratch](https://randomrealizations.com/posts/gradient-boosting-machine-from-scratch/)

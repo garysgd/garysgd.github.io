@@ -21,6 +21,11 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
+        {%- if post.subtitle -%}
+          <p style="font-style: oblique; color: #555; margin: 5px 0 10px; font-size: 1.1em;">
+            {{ post.subtitle }}
+          </p>
+        {%- endif -%}
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}
