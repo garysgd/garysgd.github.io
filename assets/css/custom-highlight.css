@@ -1,0 +1,37 @@
+/* Override function names (nf) and variable names (nv) for Python code in Rouge */
+.highlight .nf {
+    color: #68a1bf; /* Reddish for function names */
+  }
+  
+  .highlight .nv {
+    color: #c33cb8d0;; /* Purple for variable names */
+  }
+  
+  /* Keywords (k), builtins (nb), etc. */
+  .highlight .k {
+    color: #c33cb8d0; /* Blue for keywords */
+  }
+  
+  .highlight .nb {
+    color: #24292e; /* Dark grey for built-in names */
+  }
+  
+  
+  .highlight .c1 {
+    color: #6a737d; /* Grey for comments */
+  }
+  .highlight .s {
+    color: #de825e; /* Orange for strings */
+}
+.highlight .sh {
+  color: #de825e; /* Orange for strings */
+}
+  /* If you want to style code blocks themselves */
+  .highlight pre {
+    background: #f6f8fa; /* Light grey background */
+    padding: 1em;
+    border-radius: 5px;
+  }
+  
+  /* Add more as needed for your style. */
+  
