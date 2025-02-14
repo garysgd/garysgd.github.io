@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Decision Tree Regressors Explained"
+title: "Decision Tree Regressors"
 subtitle: "The foundation of data science and tree based methods"
 date: 2024-12-20
 categories: [machine-learning, regression]
