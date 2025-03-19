@@ -3,21 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Reinforcement Learning for Large Language Models | if: Learn</title>
+<title>Reasoning and RL for Large Language Models | if: Learn</title>
 <meta name="generator" content="Jekyll v4.3.3" />
-<meta property="og:title" content="Reinforcement Learning for Large Language Models" />
+<meta property="og:title" content="Reasoning and RL for Large Language Models" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data." />
-<meta property="og:description" content="The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data." />
+<meta name="description" content="When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm." />
+<meta property="og:description" content="When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm." />
 <link rel="canonical" href="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" />
 <meta property="og:url" content="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" />
 <meta property="og:site_name" content="if: Learn" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-02-12T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Reinforcement Learning for Large Language Models" />
+<meta property="twitter:title" content="Reasoning and RL for Large Language Models" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-12T00:00:00+08:00","datePublished":"2025-02-12T00:00:00+08:00","description":"The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.","headline":"Reinforcement Learning for Large Language Models","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"},"url":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-12T00:00:00+08:00","datePublished":"2025-02-12T00:00:00+08:00","description":"When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.","headline":"Reasoning and RL for Large Language Models","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"},"url":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="if: Learn" /><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 
@@ -45,32 +45,66 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Reinforcement Learning for Large Language Models</title>
+    <title>Reasoning and RL for Large Language Models</title>
 
     <!-- If you want custom highlighting, link it here or in default.html -->
     <link rel="stylesheet" href="/assets/css/custom-highlight.css">
+    <style>
+      /* Increase the font size of the post title */
+      .post-header h1 {
+        font-size: 45px !important;
+      }
+    </style>
   </head>
 
   <body>
     <article class="post">
       <!-- Title or other info if needed -->
       <header class="post-header">
-        <h1>Reinforcement Learning for Large Language Models</h1>
+        <h1>Reasoning and RL for Large Language Models</h1>
       </header>
 
       <div class="post-content">
-        <p>The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. 
-Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output.
-The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding.
-This also has a nice analogy/mapping back to the classic space-time tradeoff for computing.
-With a high amount of storage, less compute is needed to solve a problem.
-If computing can be done on the fly, then less storage is needed.
-This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique.
-The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.</p>
+        <p>When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.</p>
 
-<p>While previous LLMs could reason to some extent using basic prompt engineering techniques like ‘think step by step’, o1 was one of the first models where reasoning was part of training the model. A further breakthrough came with the introduction of deepseek r1, a reasoning model with open sourced code. The launch of r1 caused a huge waves in both the tech sector and the economy, as training costs were reported to be far lower than that of previous LLMs. This resulted in a large drop in market cap for GPU manufacturers that provide hardware for training models.</p>
+<p>The introduction of reasoning methods marks another paradigm shift in the way computation is performed using large language models. This has resulted in another form of scaling laws, moving away from improving performance at training time to inference time scaling. To reason is to be able to think logically in a series of sequential steps. Like walking step by step through a grid to get to a goal, reasoning is a natural complement that works well with reinforcement learning.</p>
 
-<p>One of the key innovations of the deepseek model is the Group Relative Policy Optimization (GRPO) algorithm, which removes the need for training the critic network that is typically a part of the Proximal Policy Optimization (PPO) used to train previous LLMs. We will first introduce how PPO works in the context of LLMs before highlighting the innovations of GRPO.</p>
+<p>Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.</p>
+
+<p>Previous LLMs could reason in a adhoc sense using basic prompt engineering techniques like asking the model to ‘think step by step’. However, o1 was one of the first models where reasoning was part of training the model. A further breakthrough came with the introduction of deepseek r1, a reasoning model with open sourced code. One of the key innovations of the deepseek model is the Group Relative Policy Optimization (GRPO) algorithm, which removes the need for training the critic network that is typically a part of the Proximal Policy Optimization (PPO) used to train previous LLMs.</p>
+
+<p>In this post, I will first introduce the various reinforcement learning notations that are used in the context of NLP, followed by going through the classic PPO objective followed by GRPO introduced by deepseek.</p>
+
+<h2 id="rl-definitions-in-an-nlp-context">RL Definitions in an NLP Context</h2>
+
+<p>Before diving into PPO and GRPO, we first defined the various notations used in the context of reinforcement learning for LLMs:</p>
+
+<ul>
+  <li>
+    <p><strong>Prompt (\(q\))</strong>: The initial user input providing context for generation (can be denoted as \(q_t\) if dynamic).</p>
+  </li>
+  <li>
+    <p><strong>State (\(s_t\))</strong>: The combination of the prompt and all tokens generated so far, i.e., 
+\(s_t = (q, o_{&lt;t})\)</p>
+  </li>
+  <li>
+    <p><strong>Action (\(o_t\))</strong>: The next token generated by the model at time \(t\).</p>
+  </li>
+  <li>
+    <p><strong>Reward (\(r_t\))</strong>: A numerical score indicating how “good” the chosen token or sequence is (can be step-level or sequence-level).</p>
+  </li>
+  <li>
+    <p><strong>Policy (\(\pi_\theta\))</strong>: The mapping from state \(s_t\) to a probability distribution over the next token; effectively, the LLM parameterized by \(\theta\).</p>
+  </li>
+  <li>
+    <p><strong>Discount Factor (\(\gamma\))</strong>: Weights future rewards relative to immediate ones. For example, with \(\gamma=0.9\), rewards are discounted by 10% per time step.</p>
+  </li>
+  <li>
+    <p><strong>GAE Parameter (\(\lambda\))</strong>: Balances bias and variance in advantage estimation by controlling how much future rewards influence the advantage calculation (higher \(\lambda\) includes more future rewards).</p>
+  </li>
+</ul>
+
+<h2 id="proximal-policy-optimization">Proximal Policy Optimization</h2>
 
 <p>The PPO surrogate objective is given by:
 \(J_{\text{PPO}}(\theta) = \mathbb{E}_{q \sim P(Q),\, o \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)}
@@ -88,12 +122,35 @@ The prompts/inputs to the LLM can be thought of as a key or unique identifier, a
 
 \[\pi_\theta(o_t \mid q, o_{&lt;t})\]
 
-<p>For nlp the policy \(\pi_\theta\) is determined by the neural network, typically based on the transformer architecture. The neural network takes in \(t-1\) input tokens of a sequence \(o\) along with the prompt sequence \(q\) to predict the \(t\) token of the sequence denoted by \(o_t\). We can illustrate this with a simple example. While tokens typically denote subwords akin to phonemes rather than actual words, we will assume each word is a token for the sake of simplification.</p>
+<p>For NLP the policy \(\pi_\theta\) is determined by the neural network, typically based on the transformer architecture. The neural network takes in \(t-1\) input tokens of a sequence \(o\) along with the prompt sequence \(q\) to predict the \(t\) token of the sequence denoted by \(o_t\). We can illustrate this with a simple example. While tokens typically denote subwords akin to phonemes rather than actual words, we will assume each word is a token for the sake of simplification.</p>
 
-<p>Given a prompt \(q\) such as “What is the capital of France?” the policy model \(\pi_\theta\) starts to predict starting with the first token \(o_1\) which could be “The”. The policy model would then output subsequent tokens dependent based on the prompt and the previous output tokens. The ratio \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\) then measures how much more likely the new policy is to predict the subsequent token \(o_t\) relative to the old policy. It acts as a weight for the advantage \(A_t\) which we will now elaborate now.</p>
+<p>Given a prompt \(q\) such as “What is the capital of France?” the policy model \(\pi_\theta\) starts to predict starting with the first token \(o_1\) which could be “The”. The policy model would then output subsequent tokens dependent based on the prompt and the previous output tokens. The ratio \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\) then measures how much more likely the new policy is to predict the subsequent token \(o_t\) relative to the old policy. It acts as a weight for the advantage \(A_t\) which we will now elaborate on.</p>
 
 <p>For PPO, the advantage \(A_t\) can be expressed as</p>
 
+\[A_t = \sum_{l=0}^{T-t-1} (\gamma \lambda)^l \left[ Q(s_{t+l}, o_{t+l}) - V(s_{t+l}) \right]\]
+
+<p>\(Q(s_t, o_t)\) represents the cumulative reward after outputting \(o_t\). It is the sum of the immediate reward for predicting that token denoted by \(r_t\) and the discounted sum of future rewards determined by the value network.</p>
+
+\[Q(s_t, o_t) \approx r_t + \gamma\, V(s_{t+1})\]
+
+<p>The value network itself is trained using the loss function:</p>
+
+\[L_V=\frac{1}{2}\,\mathbb{E}_t\left[\left(V_\psi(s_t)-R_t\right)^2\right]\]
+
+<p>Where \(R_t\) is the true expected sum of the discounted future rewards:</p>
+
+\[R_t = r_t + \gamma\, r_{t+1} + \gamma^2\, r_{t+2} + \cdots + \gamma^{T-t}\, r_T.\]
+
+<p>From these definitions, advantage quantifies the difference between the cumulative reward received for the current action (which in the case of NLP is the token generated) and the reward that was expected according to the value network. A positive advantage means that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
+
+<p>Intuitively we can see that having a advantage means that the policy is outputting a better token than expected which is what we want to optimize. Going back to our equation for PPO, advantage plays is an part in optimizing the PPO objective which is an expectation of two terms.</p>
+
+<p>The purpose of the first term, \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t\) is to prevent the new policy \(\pi_\theta(o_t \mid q, o_{&lt;t})\) from deviating too much from the old policy \({\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\). This prevents unpredictable behaviour of the policy and also prevent it from forgetting the properties of the old policy which may have merit.</p>
+
+<p>The second term \(\text{clip}\left(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon\right) \, A_t\) prevents any token from being overly rewarded or having a high value. Without clipping the policy model may be overly biased towards certain tokens.</p>
+
+<p>Having now gone through all the terms, we can now describe the proximal policy objective as training a network to optmise the next token culmulative reward with some constrants.</p>
 
       </div>
     </article>

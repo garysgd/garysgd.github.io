@@ -1,44 +1,51 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-02-27T18:18:12+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work | Gary Phua</subtitle><entry><title type="html">Reference Frames for Orbital Mechanics</title><link href="http://localhost:4000/space/2025/02/17/orbital-mechanics.html" rel="alternate" type="text/html" title="Reference Frames for Orbital Mechanics" /><published>2025-02-17T00:00:00+08:00</published><updated>2025-02-17T00:00:00+08:00</updated><id>http://localhost:4000/space/2025/02/17/orbital-mechanics</id><content type="html" xml:base="http://localhost:4000/space/2025/02/17/orbital-mechanics.html"><![CDATA[<p>In a simple two-body problem where two bodies have finite mass, their trajectories in space will follow an elliptical orbit. When the mass of one of the bodies is much larger than the other, \(m_1&gt;&gt;m_2\), we can approximate the larger body to be stationary while the smaller body will orbit around it. The trajectory of the smaller body can be modelled with either the Keplerian or Cartesian reference frames, each with their own pros and cons. The Cartesian reference frame is useful for numerical calculations, such as deriving future trajectories of an object given the current trajectory. The Keplerian frame is useful for gaining a more intuitive understanding of the object’s orbit as it describes mathematically the phase space of the object’s orbit.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-03-19T16:51:48+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work | Gary Phua</subtitle><entry><title type="html">Reference Frames for Orbital Mechanics</title><link href="http://localhost:4000/space/2025/02/17/orbital-mechanics.html" rel="alternate" type="text/html" title="Reference Frames for Orbital Mechanics" /><published>2025-02-17T00:00:00+08:00</published><updated>2025-02-17T00:00:00+08:00</updated><id>http://localhost:4000/space/2025/02/17/orbital-mechanics</id><content type="html" xml:base="http://localhost:4000/space/2025/02/17/orbital-mechanics.html"><![CDATA[<p>In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.</p>
 
 <h4 id="cartesian-reference-frame">Cartesian Reference Frame</h4>
 <p align="center">
-<img src="/images/orbit1.jpg" alt="Orbit Image" width="500" />
+  <img src="/images/orbit1.jpg" alt="Orbit Image" width="500" />
 </p>
 
-<p>This is the reference frame that is familiar to most people, with position \(\vec{r} = [x, y, z]\) and velocity \(\vec{v} = [v_x, v_y, v_z]\). It is also an inertial reference frame, with point of reference being the larger body which is typically Earth. The cartesian state vector is described as a six dimensional vector formed from the concatenation of the position and velocity vectors:</p>
+<p>This is the reference frame familiar to most people, defined by the position 
+\(\vec{r} = [x, y, z]\) 
+and velocity 
+\(\vec{v} = [v_x, v_y, v_z].\)<br />
+It is an inertial reference frame with the central (larger) body—typically Earth—at its point of reference. The Cartesian state vector is a six-dimensional vector formed by concatenating the position and velocity vectors:</p>
 
-\[\vec{c} = [x, y, z, v_x, v_y, v_z]\]
+\[\vec{c} = [x, y, z, v_x, v_y, v_z].\]
 
-<p>This state vector along with the gravitational parameter \(\mu\) is sufficient to calculate future trajectories of the object.</p>
+<p>Together with the gravitational parameter \(\mu\), this state vector is sufficient to calculate the future trajectory of the object.</p>
 
 <h4 id="keplerian-reference-frame">Keplerian Reference Frame</h4>
+<p align="center">
+  <img src="/images/orbit3.jpg" alt="Orbit Image" width="500" />
+</p>
 
 <p>In the Keplerian reference frame, an orbit is described not by instantaneous position and velocity components but by six <strong>orbital elements</strong> that capture the shape, size, orientation, and current position along the orbit. These six elements are:</p>
 
 <ul>
   <li>
-    <p><strong>Semimajor Axis</strong> \(\textbf{a}\):<br />
+    <p><strong>Semimajor Axis,</strong> \(a\)<br />
 Defines the size of the orbit—the average distance between the orbiting object and the central body.</p>
   </li>
   <li>
-    <p><strong>Eccentricity,</strong> \(\textbf{e}\):<br />
-Describes the shape of the orbit. An eccentricity of 0 corresponds to a circular orbit, while values between 0 and 1 indicate an ellipse.</p>
+    <p><strong>Eccentricity,</strong> \(e\)<br />
+Describes the shape of the orbit. An eccentricity of 0 corresponds to a circular orbit, while values between 0 and 1 indicate an elliptical orbit.</p>
   </li>
   <li>
-    <p><strong>Inclination,</strong> (i):<br />
-The tilt of the orbital plane relative to a chosen reference plane (often the equatorial or ecliptic plane).</p>
+    <p><strong>Inclination,</strong> \(i\)<br />
+Represents the tilt of the orbital plane relative to a chosen reference plane (often the equatorial or ecliptic plane).</p>
   </li>
   <li>
-    <p><strong>Right Ascension of the Ascending Node</strong> (\(\Omega\)):<br />
-The angle in the reference plane from a fixed direction (typically the vernal equinox) to the point where the orbiting body crosses the reference plane going upward (the ascending node).</p>
+    <p><strong>Right Ascension of the Ascending Node,</strong> \(\Omega\)<br />
+The angle in the reference plane from a fixed direction (typically the vernal equinox) to the point where the orbiting body crosses the reference plane upward (the ascending node).</p>
   </li>
   <li>
-    <p><strong>Argument of Periapsis,</strong> (\(\omega\\)):<br />
+    <p><strong>Argument of Periapsis,</strong> \(\omega\)<br />
 Measured in the orbital plane, this angle specifies the direction of the closest approach (periapsis) relative to the ascending node.</p>
   </li>
   <li>
-    <p><strong>True Anomaly,</strong> (\nu):<br />
-The angle (also measured in the orbital plane) that indicates the object’s current position along its orbit relative to the periapsis.</p>
+    <p><strong>True Anomaly,</strong> \(\nu\)<br />
+Indicates the object’s current position along its orbit relative to the periapsis, measured in the orbital plane.</p>
   </li>
 </ul>
 
@@ -46,20 +53,294 @@ The angle (also measured in the orbital plane) that indicates the object’s cur
 
 \[\vec{k} = [\,a,\; e,\; i,\; \Omega,\; \omega,\; \nu\,].\]
 
-<p>Together with the gravitational parameter (\mu), this 6‑element vector fully defines the orbit in the two‑body problem. Even though it does not directly include position and velocity components, these orbital elements contain all the necessary information—through Kepler’s laws and the laws of motion—to compute the object’s future trajectory.</p>
+<p>Together with the gravitational parameter \(\mu\), this six-element vector fully defines the orbit in the two-body problem. Although it does not directly include position and velocity components, these orbital elements encapsulate all the necessary information—through Kepler’s laws and the laws of motion—to compute the object’s future trajectory.</p>
 
-<p>By knowing (\vec{k}) and (\mu), one can derive the instantaneous Cartesian state vector (and vice versa) through established transformation formulas. This makes the Keplerian state vector not only a compact representation of the orbit’s geometry but also sufficient for predicting the motion of the orbiting object over time.</p>]]></content><author><name></name></author><category term="space" /><category term="orbital-mechanics" /><summary type="html"><![CDATA[In a simple two-body problem where two bodies have finite mass, their trajectories in space will follow an elliptical orbit. When the mass of one of the bodies is much larger than the other, \(m_1&gt;&gt;m_2\), we can approximate the larger body to be stationary while the smaller body will orbit around it. The trajectory of the smaller body can be modelled with either the Keplerian or Cartesian reference frames, each with their own pros and cons. The Cartesian reference frame is useful for numerical calculations, such as deriving future trajectories of an object given the current trajectory. The Keplerian frame is useful for gaining a more intuitive understanding of the object’s orbit as it describes mathematically the phase space of the object’s orbit.]]></summary></entry><entry><title type="html">Reinforcement Learning for Large Language Models</title><link href="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" rel="alternate" type="text/html" title="Reinforcement Learning for Large Language Models" /><published>2025-02-12T00:00:00+08:00</published><updated>2025-02-12T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo</id><content type="html" xml:base="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"><![CDATA[<p>The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. 
-Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output.
-The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding.
-This also has a nice analogy/mapping back to the classic space-time tradeoff for computing.
-With a high amount of storage, less compute is needed to solve a problem.
-If computing can be done on the fly, then less storage is needed.
-This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique.
-The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.</p>
+<p>Given \(\vec{k}\) and \(\mu\), one can derive the instantaneous Cartesian state vector (and vice versa) using established transformation formulas. This makes the Keplerian state vector not only a compact representation of the orbit’s geometry but also sufficient for predicting the motion of the orbiting object over time.</p>
 
-<p>While previous LLMs could reason to some extent using basic prompt engineering techniques like ‘think step by step’, o1 was one of the first models where reasoning was part of training the model. A further breakthrough came with the introduction of deepseek r1, a reasoning model with open sourced code. The launch of r1 caused a huge waves in both the tech sector and the economy, as training costs were reported to be far lower than that of previous LLMs. This resulted in a large drop in market cap for GPU manufacturers that provide hardware for training models.</p>
+<h3 id="derivation-of-the-conic-section-orbit-equation-and-its-conversion-to-cartesian-coordinates">Derivation of the Conic Section Orbit Equation and Its Conversion to Cartesian Coordinates</h3>
 
-<p>One of the key innovations of the deepseek model is the Group Relative Policy Optimization (GRPO) algorithm, which removes the need for training the critic network that is typically a part of the Proximal Policy Optimization (PPO) used to train previous LLMs. We will first introduce how PPO works in the context of LLMs before highlighting the innovations of GRPO.</p>
+<p>In orbital mechanics, the motion of a secondary body under the gravitational influence of a primary (central) body is governed by an inverse-square force. The resulting trajectory is a conic section (ellipse, parabola, or hyperbola). In the bound case (negative total energy), the orbit is an ellipse, and its shape and orientation can be described by six Keplerian orbital elements:</p>
+
+\[\vec{k} = [\,a,\; e,\; i,\; \Omega,\; \omega,\; \nu\,],\]
+
+<p>where:</p>
+<ul>
+  <li><strong>(a)</strong> is the semimajor axis (size of the orbit),</li>
+  <li><strong>(e)</strong> is the eccentricity (shape of the orbit),</li>
+  <li><strong>(i)</strong> is the inclination (tilt of the orbital plane),</li>
+  <li><strong>(\Omega)</strong> is the right ascension of the ascending node (orientation of the line of nodes in the reference plane),</li>
+  <li><strong>(\omega)</strong> is the argument of periapsis (angle from the ascending node to periapsis within the orbital plane),</li>
+  <li><strong>(\nu)</strong> is the true anomaly (the current position along the orbit measured from periapsis).</li>
+</ul>
+
+<p>Together with the gravitational parameter \(\mu\), these elements fully define the orbit in a two-body problem. We now describe, step by step, how the conic orbit equation is derived and how the Keplerian state vector is converted into the Cartesian (inertial) state vector.</p>
+
+<hr />
+
+<h4 id="1-derivation-of-the-conic-section-orbit-equation">1. Derivation of the Conic Section Orbit Equation</h4>
+
+<p><strong>a. Newton’s Equation of Motion</strong></p>
+
+<p>For a body moving under the gravitational force of a central mass, Newton’s law gives:</p>
+
+\[\ddot{\mathbf{r}} = -\frac{\mu}{r^3}\mathbf{r},\]
+
+<p>where \(\mu = G(M+m)\) (often approximated as \(GM\) when \(M \gg m\)). In polar coordinates (with variables \(r\) and \(\theta\)), the position vector is</p>
+
+\[\mathbf{r} = r\,\hat{\mathbf{r}}.\]
+
+<p><strong>b. Conservation of Angular Momentum</strong></p>
+
+<p>Angular momentum per unit mass is conserved:</p>
+
+\[h = r^2 \dot{\theta} = \text{constant},\]
+
+<p>which implies</p>
+
+\[\dot{\theta} = \frac{h}{r^2}.\]
+
+<p><strong>c. Substituting \(u = \frac{1}{r}\)</strong></p>
+
+<p>Define the reciprocal variable:</p>
+
+\[u(\theta) = \frac{1}{r}.\]
+
+<p>Differentiating with respect to \(\theta\):</p>
+
+<ul>
+  <li>
+    <p>The first derivative is</p>
+
+\[\frac{dr}{d\theta} = -\frac{1}{u^2}\frac{du}{d\theta}.\]
+  </li>
+  <li>
+    <p>The second derivative can be related to time derivatives by noting</p>
+
+\[\ddot{r} = \frac{d^2r}{d\theta^2}\,\dot{\theta}^2.\]
+  </li>
+</ul>
+
+<p>Substitute these into the radial component of Newton’s equation and use</p>
+
+\[\dot{\theta} = h\,u^2.\]
+
+<p>After some algebra, the radial equation reduces to the differential equation:</p>
+
+\[\frac{d^2 u}{d\theta^2} + u = \frac{\mu}{h^2}.\]
+
+<p><strong>d. Solving the Differential Equation</strong></p>
+
+<p>This is a linear second-order differential equation with constant coefficients. Its general solution is:</p>
+
+\[u(\theta) = A\cos(\theta - \theta_0) + \frac{\mu}{h^2},\]
+
+<p>where \(A\) and \(\theta_0\) are constants determined by the initial conditions. By choosing the coordinate system so that \(\theta_0 = 0\) (i.e., measuring \(\theta\) from periapsis) and defining the eccentricity \(e\) via</p>
+
+\[e = \frac{A h^2}{\mu},\]
+
+<p>we can write:</p>
+
+\[u(\theta) = \frac{\mu}{h^2}\left(1 + e\cos\theta\right).\]
+
+<p>Since \(u = \frac{1}{r}\), the orbit equation becomes:</p>
+
+\[r = \frac{h^2/\mu}{1 + e\cos\theta}.\]
+
+<p>Defining the semi-latus rectum as</p>
+
+\[p = \frac{h^2}{\mu},\]
+
+<p>the polar equation of the orbit is:</p>
+
+\[\boxed{r(\theta) = \frac{p}{1 + e\cos\theta}.}\]
+
+<p><em>Interpretation:</em></p>
+<ul>
+  <li>For \(0 \le e &lt; 1\), the orbit is elliptical.</li>
+  <li>For \(e = 0\), the orbit is circular.</li>
+  <li>For \(e = 1\), the orbit is parabolic.</li>
+  <li>For \(e &gt; 1\), the orbit is hyperbolic.</li>
+</ul>
+
+<hr />
+
+<h4 id="2-converting-the-keplerian-elements-to-a-cartesian-state-vector">2. Converting the Keplerian Elements to a Cartesian State Vector</h4>
+
+<p>Now that we have the orbit expressed in polar coordinates, we can derive the Cartesian position and velocity vectors.</p>
+
+<p><strong>a. Position in the Perifocal (PQW) Frame</strong></p>
+
+<p>In the orbital (PQW) frame, the x-axis (P-axis) points toward periapsis, and the y-axis (Q-axis) is perpendicular to it. Thus, the position vector is given by:</p>
+
+\[\mathbf{r}_{PQW} = \begin{bmatrix} r\cos\nu \\ r\sin\nu \\ 0 \end{bmatrix},\]
+
+<p>with</p>
+
+\[r = \frac{a(1-e^2)}{1 + e\cos\nu}.\]
+
+<p>Substitute to obtain:</p>
+
+\[\mathbf{r}_{PQW} = 
+\begin{bmatrix}
+\displaystyle \frac{a(1-e^2)\cos\nu}{1 + e\cos\nu} \\[1mm]
+\displaystyle \frac{a(1-e^2)\sin\nu}{1 + e\cos\nu} \\[1mm]
+0
+\end{bmatrix}.\]
+
+<p><strong>b. Velocity in the Perifocal (PQW) Frame</strong></p>
+
+<p>The velocity in polar coordinates has a radial component \(v_r = \dot{r}\) and a transverse component \(v_\theta = r\,\dot{\nu}\).</p>
+
+<p>From conservation of angular momentum, we have:</p>
+
+\[h = \sqrt{\mu\,a(1-e^2)} \quad \text{and} \quad \dot{\nu} = \frac{h}{r^2}.\]
+
+<p>Differentiate the orbit equation with respect to \(\nu\):</p>
+
+\[\frac{dr}{d\nu} = \frac{a(1-e^2)e\sin\nu}{(1+e\cos\nu)^2}.\]
+
+<p>Then, applying the chain rule:</p>
+
+\[v_r = \dot{r} = \frac{dr}{d\nu}\,\dot{\nu} 
+= \frac{a(1-e^2)e\sin\nu}{(1+e\cos\nu)^2} \cdot \frac{h}{r^2}.\]
+
+<p>Since</p>
+
+\[r^2 = \frac{a^2(1-e^2)^2}{(1+e\cos\nu)^2},\]
+
+<p>we simplify to:</p>
+
+\[v_r = \frac{h\,e\sin\nu}{a(1-e^2)}.\]
+
+<p>The transverse component is:</p>
+
+\[v_\theta = r\,\dot{\nu} = \frac{h}{r} = \frac{h\,(1+e\cos\nu)}{a(1-e^2)}.\]
+
+<p>The velocity vector in the PQW frame is then given by:</p>
+
+\[\mathbf{v}_{PQW} = \begin{bmatrix}
+v_r\cos\nu - v_\theta\sin\nu \\[1mm]
+v_r\sin\nu + v_\theta\cos\nu \\[1mm]
+0
+\end{bmatrix}.\]
+
+<p>After substituting the expressions for \(v_r\) and \(v_\theta\) and simplifying, we obtain the commonly used form:</p>
+
+\[\mathbf{v}_{PQW} = 
+\begin{bmatrix}
+-\sqrt{\dfrac{\mu}{p}}\,\sin\nu \\[1mm]
+\sqrt{\dfrac{\mu}{p}}\,(e+\cos\nu) \\[1mm]
+0
+\end{bmatrix},\]
+
+<p>with \(p = a(1-e^2)\).</p>
+
+<p><strong>c. Transforming from the Perifocal Frame to the Inertial (Cartesian) Frame</strong></p>
+
+<p>To obtain the Cartesian state vector in an inertial frame (often Earth-Centered Inertial), we perform three successive rotations:</p>
+
+<ol>
+  <li>Rotate by \(-\omega\) about the z-axis.</li>
+  <li>Rotate by \(-i\) about the x-axis.</li>
+  <li>Rotate by \(-\Omega\) about the z-axis.</li>
+</ol>
+
+<p>The combined rotation matrix is given by:</p>
+
+\[Q_{Xx} = R_z(-\Omega)\, R_x(-i)\, R_z(-\omega),\]
+
+<p>or equivalently (depending on the chosen convention):</p>
+
+\[Q_{Xx} =
+\begin{bmatrix}
+\cos\Omega\cos\omega - \sin\Omega\sin\omega\cos i &amp; -\cos\Omega\sin\omega - \sin\Omega\cos\omega\cos i &amp; \sin\Omega\sin i \\
+\sin\Omega\cos\omega + \cos\Omega\sin\omega\cos i &amp; -\sin\Omega\sin\omega + \cos\Omega\cos\omega\cos i &amp; -\cos\Omega\sin i \\
+\sin\omega\sin i &amp; \cos\omega\sin i &amp; \cos i 
+\end{bmatrix}.\]
+
+<p>Thus, the Cartesian position and velocity vectors are:</p>
+
+\[\mathbf{r}_{ECI} = Q_{Xx}\,\mathbf{r}_{PQW},\]
+
+\[\mathbf{v}_{ECI} = Q_{Xx}\,\mathbf{v}_{PQW}.\]
+
+<hr />
+
+<h4 id="5-summary">5. Summary</h4>
+
+<ol>
+  <li>
+    <p><strong>Conic Section Orbit Equation:</strong></p>
+
+\[r(\theta) = \frac{p}{1 + e\cos\theta}, \quad \text{with } p = \frac{h^2}{\mu}.\]
+  </li>
+  <li>
+    <p><strong>Perifocal (PQW) Position:</strong></p>
+
+\[\mathbf{r}_{PQW} = \begin{bmatrix}
+\displaystyle \frac{a(1-e^2)\cos\nu}{1 + e\cos\nu} \\[1mm]
+\displaystyle \frac{a(1-e^2)\sin\nu}{1 + e\cos\nu} \\[1mm]
+0
+\end{bmatrix}.\]
+  </li>
+  <li>
+    <p><strong>Perifocal (PQW) Velocity:</strong></p>
+
+\[\mathbf{v}_{PQW} = \begin{bmatrix}
+-\sqrt{\dfrac{\mu}{p}}\,\sin\nu \\[1mm]
+\sqrt{\dfrac{\mu}{p}}\,(e+\cos\nu) \\[1mm]
+0
+\end{bmatrix}.\]
+  </li>
+  <li>
+    <p><strong>Transformation to the Inertial Frame:</strong></p>
+
+\[\mathbf{r}_{ECI} = Q_{Xx}\,\mathbf{r}_{PQW},\quad \mathbf{v}_{ECI} = Q_{Xx}\,\mathbf{v}_{PQW},\]
+
+    <p>where the rotation matrix \(Q_{Xx}\) incorporates rotations by \(-\omega\), \(-i\), and \(-\Omega\).</p>
+  </li>
+</ol>
+
+<p>This complete derivation demonstrates how the Keplerian elements define a conic (elliptical) orbit and how to mathematically convert that description into the Cartesian state vector needed for numerical trajectory prediction.</p>]]></content><author><name></name></author><category term="space" /><category term="orbital-mechanics" /><summary type="html"><![CDATA[In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.]]></summary></entry><entry><title type="html">Reasoning and RL for Large Language Models</title><link href="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" rel="alternate" type="text/html" title="Reasoning and RL for Large Language Models" /><published>2025-02-12T00:00:00+08:00</published><updated>2025-02-12T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo</id><content type="html" xml:base="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"><![CDATA[<p>When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.</p>
+
+<p>The introduction of reasoning methods marks another paradigm shift in the way computation is performed using large language models. This has resulted in another form of scaling laws, moving away from improving performance at training time to inference time scaling. To reason is to be able to think logically in a series of sequential steps. Like walking step by step through a grid to get to a goal, reasoning is a natural complement that works well with reinforcement learning.</p>
+
+<p>Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.</p>
+
+<p>Previous LLMs could reason in a adhoc sense using basic prompt engineering techniques like asking the model to ‘think step by step’. However, o1 was one of the first models where reasoning was part of training the model. A further breakthrough came with the introduction of deepseek r1, a reasoning model with open sourced code. One of the key innovations of the deepseek model is the Group Relative Policy Optimization (GRPO) algorithm, which removes the need for training the critic network that is typically a part of the Proximal Policy Optimization (PPO) used to train previous LLMs.</p>
+
+<p>In this post, I will first introduce the various reinforcement learning notations that are used in the context of NLP, followed by going through the classic PPO objective followed by GRPO introduced by deepseek.</p>
+
+<h2 id="rl-definitions-in-an-nlp-context">RL Definitions in an NLP Context</h2>
+
+<p>Before diving into PPO and GRPO, we first defined the various notations used in the context of reinforcement learning for LLMs:</p>
+
+<ul>
+  <li>
+    <p><strong>Prompt (\(q\))</strong>: The initial user input providing context for generation (can be denoted as \(q_t\) if dynamic).</p>
+  </li>
+  <li>
+    <p><strong>State (\(s_t\))</strong>: The combination of the prompt and all tokens generated so far, i.e., 
+\(s_t = (q, o_{&lt;t})\)</p>
+  </li>
+  <li>
+    <p><strong>Action (\(o_t\))</strong>: The next token generated by the model at time \(t\).</p>
+  </li>
+  <li>
+    <p><strong>Reward (\(r_t\))</strong>: A numerical score indicating how “good” the chosen token or sequence is (can be step-level or sequence-level).</p>
+  </li>
+  <li>
+    <p><strong>Policy (\(\pi_\theta\))</strong>: The mapping from state \(s_t\) to a probability distribution over the next token; effectively, the LLM parameterized by \(\theta\).</p>
+  </li>
+  <li>
+    <p><strong>Discount Factor (\(\gamma\))</strong>: Weights future rewards relative to immediate ones. For example, with \(\gamma=0.9\), rewards are discounted by 10% per time step.</p>
+  </li>
+  <li>
+    <p><strong>GAE Parameter (\(\lambda\))</strong>: Balances bias and variance in advantage estimation by controlling how much future rewards influence the advantage calculation (higher \(\lambda\) includes more future rewards).</p>
+  </li>
+</ul>
+
+<h2 id="proximal-policy-optimization">Proximal Policy Optimization</h2>
 
 <p>The PPO surrogate objective is given by:
 \(J_{\text{PPO}}(\theta) = \mathbb{E}_{q \sim P(Q),\, o \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)}
@@ -77,11 +358,35 @@ The prompts/inputs to the LLM can be thought of as a key or unique identifier, a
 
 \[\pi_\theta(o_t \mid q, o_{&lt;t})\]
 
-<p>For nlp the policy \(\pi_\theta\) is determined by the neural network, typically based on the transformer architecture. The neural network takes in \(t-1\) input tokens of a sequence \(o\) along with the prompt sequence \(q\) to predict the \(t\) token of the sequence denoted by \(o_t\). We can illustrate this with a simple example. While tokens typically denote subwords akin to phonemes rather than actual words, we will assume each word is a token for the sake of simplification.</p>
+<p>For NLP the policy \(\pi_\theta\) is determined by the neural network, typically based on the transformer architecture. The neural network takes in \(t-1\) input tokens of a sequence \(o\) along with the prompt sequence \(q\) to predict the \(t\) token of the sequence denoted by \(o_t\). We can illustrate this with a simple example. While tokens typically denote subwords akin to phonemes rather than actual words, we will assume each word is a token for the sake of simplification.</p>
 
-<p>Given a prompt \(q\) such as “What is the capital of France?” the policy model \(\pi_\theta\) starts to predict starting with the first token \(o_1\) which could be “The”. The policy model would then output subsequent tokens dependent based on the prompt and the previous output tokens. The ratio \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\) then measures how much more likely the new policy is to predict the subsequent token \(o_t\) relative to the old policy. It acts as a weight for the advantage \(A_t\) which we will now elaborate now.</p>
+<p>Given a prompt \(q\) such as “What is the capital of France?” the policy model \(\pi_\theta\) starts to predict starting with the first token \(o_1\) which could be “The”. The policy model would then output subsequent tokens dependent based on the prompt and the previous output tokens. The ratio \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\) then measures how much more likely the new policy is to predict the subsequent token \(o_t\) relative to the old policy. It acts as a weight for the advantage \(A_t\) which we will now elaborate on.</p>
 
-<p>For PPO, the advantage \(A_t\) can be expressed as</p>]]></content><author><name></name></author><category term="machine-learning" /><category term="reinforcement-learning" /><category term="python" /><category term="llms" /><category term="generative ai" /><summary type="html"><![CDATA[The introduction of reasoning methods marks a paradigm shift in the way computation is performed using large language models. Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.]]></summary></entry><entry><title type="html">Decision Tree Regressors</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Decision Tree Regressors" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>Most people practicing data science would be aware of tree based learning methods like XGBoost.
+<p>For PPO, the advantage \(A_t\) can be expressed as</p>
+
+\[A_t = \sum_{l=0}^{T-t-1} (\gamma \lambda)^l \left[ Q(s_{t+l}, o_{t+l}) - V(s_{t+l}) \right]\]
+
+<p>\(Q(s_t, o_t)\) represents the cumulative reward after outputting \(o_t\). It is the sum of the immediate reward for predicting that token denoted by \(r_t\) and the discounted sum of future rewards determined by the value network.</p>
+
+\[Q(s_t, o_t) \approx r_t + \gamma\, V(s_{t+1})\]
+
+<p>The value network itself is trained using the loss function:</p>
+
+\[L_V=\frac{1}{2}\,\mathbb{E}_t\left[\left(V_\psi(s_t)-R_t\right)^2\right]\]
+
+<p>Where \(R_t\) is the true expected sum of the discounted future rewards:</p>
+
+\[R_t = r_t + \gamma\, r_{t+1} + \gamma^2\, r_{t+2} + \cdots + \gamma^{T-t}\, r_T.\]
+
+<p>From these definitions, advantage quantifies the difference between the cumulative reward received for the current action (which in the case of NLP is the token generated) and the reward that was expected according to the value network. A positive advantage means that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
+
+<p>Intuitively we can see that having a advantage means that the policy is outputting a better token than expected which is what we want to optimize. Going back to our equation for PPO, advantage plays is an part in optimizing the PPO objective which is an expectation of two terms.</p>
+
+<p>The purpose of the first term, \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t\) is to prevent the new policy \(\pi_\theta(o_t \mid q, o_{&lt;t})\) from deviating too much from the old policy \({\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\). This prevents unpredictable behaviour of the policy and also prevent it from forgetting the properties of the old policy which may have merit.</p>
+
+<p>The second term \(\text{clip}\left(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon\right) \, A_t\) prevents any token from being overly rewarded or having a high value. Without clipping the policy model may be overly biased towards certain tokens.</p>
+
+<p>Having now gone through all the terms, we can now describe the proximal policy objective as training a network to optmise the next token culmulative reward with some constrants.</p>]]></content><author><name></name></author><category term="machine-learning" /><category term="reinforcement-learning" /><category term="python" /><category term="llms" /><category term="generative ai" /><summary type="html"><![CDATA[When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.]]></summary></entry><entry><title type="html">Decision Tree Regressors</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Decision Tree Regressors" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>Most people practicing data science would be aware of tree based learning methods like XGBoost.
 Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even <a href="https://arxiv.org/pdf/2207.08815">outperform neural networks</a> when dealing with tabular/structured data.</p>
 
 <p>Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self-attention for seq2seq models or convolutions for images.
