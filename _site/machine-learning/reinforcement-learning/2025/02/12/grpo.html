@@ -106,51 +106,115 @@
 
 <h2 id="proximal-policy-optimization">Proximal Policy Optimization</h2>
 
-<p>The PPO surrogate objective is given by:
-\(J_{\text{PPO}}(\theta) = \mathbb{E}_{q \sim P(Q),\, o \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)}
-\left[
-\frac{1}{|o|} \sum_{t=1}^{|o|}
-\min\!\left\{
-\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t,\,
-\text{clip}\!\left(
-\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon
-\right) A_t
-\right\}
-\right].\)</p>
+<p>The PPO surrogate objective is given by:</p>
 
-<p>We can first go through this equation term by term in the context of natural language processing to gain better insight on how PPO works. We can start with the policy:</p>
+\[\begin{aligned}
+J_{\text{PPO}}(\theta)
+&amp;= \mathbb{E}_{q \sim P(Q),\, o \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)}
+\Biggl[
+  \frac{1}{|o|} \sum_{t=1}^{|o|}
+  \min\Bigl\{
+    \frac{\pi_\theta(o_t \mid q,\,o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q,\,o_{&lt;t})} \, A_t,\; \\[1mm]
+&amp;\quad
+    \text{clip}\Bigl(
+      \frac{\pi_\theta(o_t \mid q,\,o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q,\,o_{&lt;t})},\; 1-\epsilon,\; 1+\epsilon
+    \Bigr)\,A_t
+  \Bigr\}
+\Biggr]
+\end{aligned}\]
+
+<p>We can first go through this equation term by term in the context of natural language processing (NLP) to gain better insight into how PPO works. We start with the policy:</p>
 
 \[\pi_\theta(o_t \mid q, o_{&lt;t})\]
 
-<p>For NLP the policy \(\pi_\theta\) is determined by the neural network, typically based on the transformer architecture. The neural network takes in \(t-1\) input tokens of a sequence \(o\) along with the prompt sequence \(q\) to predict the \(t\) token of the sequence denoted by \(o_t\). We can illustrate this with a simple example. While tokens typically denote subwords akin to phonemes rather than actual words, we will assume each word is a token for the sake of simplification.</p>
+<p>For NLP, the policy \(\pi_\theta\) is determined by a neural network (typically based on the transformer architecture). The network takes in \(t-1\) input tokens of the sequence \(o\) along with the prompt \(q\) to predict the \(t^{th}\) token, denoted by \(o_t\). For simplicity, we assume each word is a token.</p>
 
-<p>Given a prompt \(q\) such as “What is the capital of France?” the policy model \(\pi_\theta\) starts to predict starting with the first token \(o_1\) which could be “The”. The policy model would then output subsequent tokens dependent based on the prompt and the previous output tokens. The ratio \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\) then measures how much more likely the new policy is to predict the subsequent token \(o_t\) relative to the old policy. It acts as a weight for the advantage \(A_t\) which we will now elaborate on.</p>
+<p>Given a prompt \(q\) such as “What is the capital of France?”, the policy model \(\pi_\theta\) begins by predicting the first token \(o_1\), which could be “The”. The model then generates subsequent tokens based on the prompt and the previously generated tokens. The ratio</p>
+
+\[\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\]
+
+<p>measures how much more likely the new policy is to predict the token \(o_t\) compared to the old policy. This ratio acts as a weight for the advantage \(A_t\), which we elaborate on next.</p>
 
 <p>For PPO, the advantage \(A_t\) can be expressed as</p>
 
 \[A_t = \sum_{l=0}^{T-t-1} (\gamma \lambda)^l \left[ Q(s_{t+l}, o_{t+l}) - V(s_{t+l}) \right]\]
 
-<p>\(Q(s_t, o_t)\) represents the cumulative reward after outputting \(o_t\). It is the sum of the immediate reward for predicting that token denoted by \(r_t\) and the discounted sum of future rewards determined by the value network.</p>
+<p>Here, \(Q(s_t, o_t)\) represents the cumulative reward after outputting \(o_t\). It is the sum of the immediate reward for predicting that token, denoted by \(r_t\), and the discounted sum of future rewards determined by the value network. In practice, we approximate</p>
 
 \[Q(s_t, o_t) \approx r_t + \gamma\, V(s_{t+1})\]
 
+<p>Thus, the temporal-difference error is given by</p>
+
+\[\delta_t = Q(s_t, o_t) - V(s_t) = r_t + \gamma\, V(s_{t+1}) - V(s_t)\]
+
 <p>The value network itself is trained using the loss function:</p>
 
-\[L_V=\frac{1}{2}\,\mathbb{E}_t\left[\left(V_\psi(s_t)-R_t\right)^2\right]\]
+\[L_V = \frac{1}{2}\,\mathbb{E}_t\left[\left(V_\psi(s_t)-R_t\right)^2\right],\]
 
-<p>Where \(R_t\) is the true expected sum of the discounted future rewards:</p>
+<p>where \(R_t\) is the true expected sum of the discounted future rewards:</p>
 
 \[R_t = r_t + \gamma\, r_{t+1} + \gamma^2\, r_{t+2} + \cdots + \gamma^{T-t}\, r_T.\]
 
-<p>From these definitions, advantage quantifies the difference between the cumulative reward received for the current action (which in the case of NLP is the token generated) and the reward that was expected according to the value network. A positive advantage means that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
+<p>From these definitions, the advantage quantifies the difference between the cumulative reward received for the current action (which in the case of NLP is the token generated) and the reward that was expected according to the value network. A positive advantage means that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
 
-<p>Intuitively we can see that having a advantage means that the policy is outputting a better token than expected which is what we want to optimize. Going back to our equation for PPO, advantage plays is an part in optimizing the PPO objective which is an expectation of two terms.</p>
+<p>Intuitively, having a positive advantage implies that the policy is outputting a better token than expected, which is what we want to optimize. Returning to our PPO equation, the advantage is used in two terms:</p>
 
-<p>The purpose of the first term, \(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t\) is to prevent the new policy \(\pi_\theta(o_t \mid q, o_{&lt;t})\) from deviating too much from the old policy \({\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\). This prevents unpredictable behaviour of the policy and also prevent it from forgetting the properties of the old policy which may have merit.</p>
+<ul>
+  <li>
+    <p>The first term,</p>
 
-<p>The second term \(\text{clip}\left(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon\right) \, A_t\) prevents any token from being overly rewarded or having a high value. Without clipping the policy model may be overly biased towards certain tokens.</p>
+\[\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t,\]
 
-<p>Having now gone through all the terms, we can now describe the proximal policy objective as training a network to optmise the next token culmulative reward with some constrants.</p>
+    <p>ensures that the new policy does not deviate too much from the old policy, preserving the beneficial properties of the old policy.</p>
+  </li>
+  <li>
+    <p>The second term,</p>
+
+\[\text{clip}\!\left(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon\right) A_t,\]
+
+    <p>prevents any single token from being overly rewarded by capping the ratio, ensuring that updates remain stable and do not lead to drastic changes.</p>
+  </li>
+</ul>
+
+<p>Together, these terms form the PPO surrogate objective, which trains the network to optimize the cumulative reward for the next token while enforcing constraints that prevent large deviations from the previous policy. We can next move on to describe Group Relative Policy Optimization (GRPO) which was introduced by DeepSeek in their DeepSeekMath paper and how it improves upon PPO.</p>
+
+<h2 id="group-relative-policy-optimization">Group Relative Policy Optimization</h2>
+
+<p>The GRPO surrogate objective is given by:</p>
+
+\[\begin{aligned}
+\mathcal{J}_{\text{GRPO}}(\theta)
+&amp;= \mathbb{E}_{\substack{q \sim P(Q), \\ \{o_i\}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)}}
+\Biggl[
+  \frac{1}{G} \sum_{i=1}^{G} \frac{1}{|o_i|} \sum_{t=1}^{|o_i|}
+  \Biggl\{
+    \min \Biggl(
+      \frac{\pi_\theta\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}^{\text{old}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
+      \,\hat{A}_{i,t}, \\
+&amp;\quad
+      \text{clip}\Biggl(
+        \frac{\pi_\theta\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}^{\text{old}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)},
+        1-\epsilon,\,1+\epsilon
+      \Biggr)\,\hat{A}_{i,t}
+    \Biggr)
+    \;-\;
+    \beta\, D_{\mathrm{KL}}\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]
+  \Biggr\}
+\Biggr]
+\end{aligned}\]
+
+<p>From the equation above we can see some differences compared to the PPO objective.  There is an additional sum across \(G\) actions \(o_i\) drawn from the old policy denoted by</p>
+
+\[\{ o_i \}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)\]
+
+<p>which is also expressed as a summation over \(G\) in the equation. There is also an additional KL divergence term \(D_{KL}\) which is measures the difference in policy distribution between the new policy and a reference policy, where</p>
+
+\[D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]
+\;=\;
+\frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
+\;-\;
+\log \frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
+\;-\;1.\]
 
       </div>
     </article>
