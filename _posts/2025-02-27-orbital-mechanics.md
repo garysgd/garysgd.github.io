@@ -11,7 +11,7 @@ In a simple two-body problem where two bodies have finite mass, their trajectori
 
 #### Cartesian Reference Frame
 <p align="center">
-  <img src="/images/orbit1.jpg" alt="Orbit Image" width="500">
+  <img src="/images/orbital/orbit1.jpg" alt="Orbit Image" width="500">
 </p>
 
 This is the reference frame familiar to most people, defined by the position 
@@ -26,7 +26,7 @@ Together with the gravitational parameter $$\mu$$, this state vector is sufficie
 
 #### Keplerian Reference Frame
 <p align="center">
-  <img src="/images/orbit3.jpg" alt="Orbit Image" width="500">
+  <img src="/images/orbital/orbit3.jpg" alt="Orbit Image" width="500">
 </p>
 
 In the Keplerian reference frame, an orbit is described not by instantaneous position and velocity components but by six **orbital elements** that capture the shape, size, orientation, and current position along the orbit. These six elements are:

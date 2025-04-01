@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-03-19T18:07:38+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work | Gary Phua</subtitle><entry><title type="html">Reference Frames for Orbital Mechanics</title><link href="http://localhost:4000/space/2025/02/17/orbital-mechanics.html" rel="alternate" type="text/html" title="Reference Frames for Orbital Mechanics" /><published>2025-02-17T00:00:00+08:00</published><updated>2025-02-17T00:00:00+08:00</updated><id>http://localhost:4000/space/2025/02/17/orbital-mechanics</id><content type="html" xml:base="http://localhost:4000/space/2025/02/17/orbital-mechanics.html"><![CDATA[<p>In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-04-02T00:39:24+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">if: Learn</title><subtitle>Exploring Machine Learning and Theoretical Work | Gary Phua</subtitle><entry><title type="html">Reference Frames for Orbital Mechanics</title><link href="http://localhost:4000/space/2025/02/17/orbital-mechanics.html" rel="alternate" type="text/html" title="Reference Frames for Orbital Mechanics" /><published>2025-02-17T00:00:00+08:00</published><updated>2025-02-17T00:00:00+08:00</updated><id>http://localhost:4000/space/2025/02/17/orbital-mechanics</id><content type="html" xml:base="http://localhost:4000/space/2025/02/17/orbital-mechanics.html"><![CDATA[<p>In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.</p>
 
 <h4 id="cartesian-reference-frame">Cartesian Reference Frame</h4>
 <p align="center">
-  <img src="/images/orbit1.jpg" alt="Orbit Image" width="500" />
+  <img src="/images/orbital/orbit1.jpg" alt="Orbit Image" width="500" />
 </p>
 
 <p>This is the reference frame familiar to most people, defined by the position 
@@ -17,7 +17,7 @@ It is an inertial reference frame with the central (larger) body—typically Ear
 
 <h4 id="keplerian-reference-frame">Keplerian Reference Frame</h4>
 <p align="center">
-  <img src="/images/orbit3.jpg" alt="Orbit Image" width="500" />
+  <img src="/images/orbital/orbit3.jpg" alt="Orbit Image" width="500" />
 </p>
 
 <p>In the Keplerian reference frame, an orbit is described not by instantaneous position and velocity components but by six <strong>orbital elements</strong> that capture the shape, size, orientation, and current position along the orbit. These six elements are:</p>
@@ -301,43 +301,43 @@ v_r\sin\nu + v_\theta\cos\nu \\[1mm]
   </li>
 </ol>
 
-<p>This complete derivation demonstrates how the Keplerian elements define a conic (elliptical) orbit and how to mathematically convert that description into the Cartesian state vector needed for numerical trajectory prediction.</p>]]></content><author><name></name></author><category term="space" /><category term="orbital-mechanics" /><summary type="html"><![CDATA[In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.]]></summary></entry><entry><title type="html">Reasoning and RL for Large Language Models</title><link href="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" rel="alternate" type="text/html" title="Reasoning and RL for Large Language Models" /><published>2025-02-12T00:00:00+08:00</published><updated>2025-02-12T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo</id><content type="html" xml:base="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"><![CDATA[<p>When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.</p>
+<p>This complete derivation demonstrates how the Keplerian elements define a conic (elliptical) orbit and how to mathematically convert that description into the Cartesian state vector needed for numerical trajectory prediction.</p>]]></content><author><name></name></author><category term="space" /><category term="orbital-mechanics" /><summary type="html"><![CDATA[In a simple two-body problem where two bodies have finite mass, their trajectories in space follow an elliptical orbit. When the mass of one body is much larger than that of the other, \(m_1 \gg m_2\), we can approximate the larger body as stationary while the smaller body orbits around it. The trajectory of the smaller body can be modeled with either the Keplerian or Cartesian reference frames, each offering its own advantages. The Cartesian reference frame is particularly useful for numerical calculations—such as computing future trajectories given the current state—while the Keplerian frame provides a more intuitive understanding of the orbit by describing its phase space in mathematical terms.]]></summary></entry><entry><title type="html">GRPO: How DeepSeek Created Value Without Value</title><link href="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html" rel="alternate" type="text/html" title="GRPO: How DeepSeek Created Value Without Value" /><published>2025-02-12T00:00:00+08:00</published><updated>2025-02-12T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo</id><content type="html" xml:base="http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"><![CDATA[<p align="center">
+  <img src="/images/grpo/grpo1.png" alt="Grid World Image" width="300" />
+</p>
 
-<p>The introduction of reasoning methods marks another paradigm shift in the way computation is performed using large language models. This has resulted in another form of scaling laws, moving away from improving performance at training time to inference time scaling. To reason is to be able to think logically in a series of sequential steps. Like walking step by step through a grid to get to a goal, reasoning is a natural complement that works well with reinforcement learning.</p>
+<p>When we first think of reinforcement learning, we often imagine a grid with a start and an endpoint—a classic setup where an agent learns to reach its goal using a clearly defined reward function. Although reinforcement learning techniques have been studied since the 1970s [1], their application in Natural Language Processing (NLP) is much more recent. Perhaps the most successful example of this is OpenAI’s training of ChatGPT. But what is the reward when dealing with language?</p>
 
-<p>Reasoning was first introduced into the mainstream with ChatGPT o1, where reasoning tokens were generated as part of the output. The more tokens were generated, the higher quality the model would perform in benchmarks, in particular those related to math and coding. This also has a nice analogy/mapping back to the classic space-time tradeoff for computing. With a high amount of storage, less compute is needed to solve a problem. If computing can be done on the fly, then less storage is needed. This is also apt in another sense, since pretraining neural networks has also been shown as a compression/storage technique. The prompts/inputs to the LLM can be thought of as a key or unique identifier, and when paired with the compressed LLM it is able to decompress a lossy version of the training data.</p>
+<p>Every technological leap in human history has required a successful marriage between theory and experiment, software and hardware. In machine learning, this came in the form of the backpropagation algorithm combined with GPU hardware that could perform massive parallel computations efficiently. When combining NLP with reinforcement learning, there is an essential third element: data.</p>
 
-<p>Previous LLMs could reason in a adhoc sense using basic prompt engineering techniques like asking the model to ‘think step by step’. However, o1 was one of the first models where reasoning was part of training the model. A further breakthrough came with the introduction of deepseek r1, a reasoning model with open sourced code. One of the key innovations of the deepseek model is the Group Relative Policy Optimization (GRPO) algorithm, which removes the need for training the critic network that is typically a part of the Proximal Policy Optimization (PPO) used to train previous LLMs.</p>
+<p>With trillions of words available on the internet, one might assume that data would never be a bottleneck for training language models. However, it is the quality and usefulness of that text which ultimately determine a model’s performance. Before OpenAI popularized the approach, NLP researchers devised an ingenious method: they used an autoregressive technique known as next token prediction. In the absence of a well-defined reward in language, the model was “rewarded” simply for correctly predicting the next token. This approach enabled the creation of AI models that could generate text reminiscent of Shakespeare [2] or even write code [3]. Although these models are essentially next token predictors, training them in this way allows them to learn deep semantic structures in language.</p>
 
-<p>In this post, I will first introduce the various reinforcement learning notations that are used in the context of NLP, followed by going through the classic PPO objective followed by GRPO introduced by deepseek.</p>
+<p align="center">
+  <img src="/images/grpo/grpo2.png" alt="Murder Mystery" width="350" />
+</p>
+
+<p>Ilya Sutskever has even proposed a thought experiment to illustrate the power of next token prediction. Imagine someone reading a murder mystery who has read every sentence except the last one—the sentence that reveals the murderer. Replacing the reader with a well-trained next token predictor, the model would be able to guess the murderer correctly, suggesting that it has captured a non-trivial understanding of language.</p>
+
+<p>OpenAI addressed these challenges partly through the power of belief and capitalism. The belief that larger models perform better, combined with significant investment capital (at a scale largely unavailable to academics), allowed OpenAI to hire human evaluators to label data. This labeled data was then used in the well-known Reinforcement Learning with Human Feedback (RLHF) training step. With a large amount of high-quality labeled data, they were able to fine-tune a pretrained transformer in two stages.</p>
+
+<p>The first stage, <strong>instruction fine-tuning</strong>, involved training the model on a dataset of instruction–response pairs. In this phase, the model learns to follow human instructions by mapping prompts to desired outputs—essentially mimicking the behavior captured in the labeled data. This stage aligns the model’s outputs more closely with human expectations and provides a strong initialization for the next phase.</p>
+
+<p>The second stage, <strong>RLHF</strong>, applies reinforcement learning to further refine the model’s behavior. Here, a reward model—trained from human feedback—evaluates the model’s outputs, and the policy is updated to maximize the expected cumulative reward. This step ensures that the model’s responses are not only correct but also aligned with human preferences in terms of clarity, helpfulness, and safety.</p>
+
+<p>Together, these stages enable modern large language models (LLMs) like ChatGPT to generate high-quality, human-aligned outputs. The RLHF stage, in particular, leverages reinforcement learning to fine-tune the model’s policy using advanced techniques such as Proximal Policy Optimization (PPO) and, more recently, Group Relative Policy Optimization (GRPO). GRPO removes the need for a separate critic network by computing advantages based on group comparisons among multiple outputs and by applying an explicit KL divergence penalty to stabilize policy updates.</p>
+
+<p>In this post, I will first introduce the various reinforcement learning notations used in the context of NLP, followed by a discussion of the classic PPO objective and then an explanation of GRPO as introduced by DeepSeek in their DeepSeekMath paper.</p>
 
 <h2 id="rl-definitions-in-an-nlp-context">RL Definitions in an NLP Context</h2>
 
-<p>Before diving into PPO and GRPO, we first defined the various notations used in the context of reinforcement learning for LLMs:</p>
-
 <ul>
-  <li>
-    <p><strong>Prompt (\(q\))</strong>: The initial user input providing context for generation (can be denoted as \(q_t\) if dynamic).</p>
-  </li>
-  <li>
-    <p><strong>State (\(s_t\))</strong>: The combination of the prompt and all tokens generated so far, i.e., 
-\(s_t = (q, o_{&lt;t})\)</p>
-  </li>
-  <li>
-    <p><strong>Action (\(o_t\))</strong>: The next token generated by the model at time \(t\).</p>
-  </li>
-  <li>
-    <p><strong>Reward (\(r_t\))</strong>: A numerical score indicating how “good” the chosen token or sequence is (can be step-level or sequence-level).</p>
-  </li>
-  <li>
-    <p><strong>Policy (\(\pi_\theta\))</strong>: The mapping from state \(s_t\) to a probability distribution over the next token; effectively, the LLM parameterized by \(\theta\).</p>
-  </li>
-  <li>
-    <p><strong>Discount Factor (\(\gamma\))</strong>: Weights future rewards relative to immediate ones. For example, with \(\gamma=0.9\), rewards are discounted by 10% per time step.</p>
-  </li>
-  <li>
-    <p><strong>GAE Parameter (\(\lambda\))</strong>: Balances bias and variance in advantage estimation by controlling how much future rewards influence the advantage calculation (higher \(\lambda\) includes more future rewards).</p>
-  </li>
+  <li><strong>Prompt (\(q\)):</strong> The initial user input that provides context for the generation.</li>
+  <li><strong>State (\(s_t\)):</strong> The combination of the prompt and all tokens generated so far, i.e.,<br />
+\(s_t = (q, o_{&lt;t})\)</li>
+  <li><strong>Action (\(o_t\)):</strong> The next token generated by the model at time \(t\).</li>
+  <li><strong>Reward (\(r_t\)):</strong> A numerical score indicating how “good” the chosen token or sequence is (this can be assigned at the step or sequence level).</li>
+  <li><strong>Policy (\(\pi_\theta\)):</strong> The mapping from a state \(s_t\) to a probability distribution over the next token; effectively, the LLM parameterized by \(\theta\).</li>
+  <li><strong>Discount Factor (\(\gamma\)):</strong> A factor that weighs future rewards relative to immediate ones. For example, with \(\gamma=0.9\), rewards are discounted by 10% per time step.</li>
+  <li><strong>GAE Parameter (\(\lambda\)):</strong> A parameter that balances bias and variance in advantage estimation by controlling the influence of future rewards on the advantage calculation (with higher \(\lambda\) including more future rewards).</li>
 </ul>
 
 <h2 id="proximal-policy-optimization">Proximal Policy Optimization</h2>
@@ -350,7 +350,7 @@ J_{\text{PPO}}(\theta)
 \Biggl[
   \frac{1}{|o|} \sum_{t=1}^{|o|}
   \min\Bigl\{
-    \frac{\pi_\theta(o_t \mid q,\,o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q,\,o_{&lt;t})} \, A_t,\; \\[1mm]
+    \frac{\pi_\theta(o_t \mid q,\,o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q,\,o_{&lt;t})} \, A_t,\; \\
 &amp;\quad
     \text{clip}\Bigl(
       \frac{\pi_\theta(o_t \mid q,\,o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q,\,o_{&lt;t})},\; 1-\epsilon,\; 1+\epsilon
@@ -359,41 +359,39 @@ J_{\text{PPO}}(\theta)
 \Biggr]
 \end{aligned}\]
 
-<p>We can first go through this equation term by term in the context of natural language processing (NLP) to gain better insight into how PPO works. We start with the policy:</p>
+<p>Let’s break down this equation in the context of NLP. The policy</p>
 
 \[\pi_\theta(o_t \mid q, o_{&lt;t})\]
 
-<p>For NLP, the policy \(\pi_\theta\) is determined by a neural network (typically based on the transformer architecture). The network takes in \(t-1\) input tokens of the sequence \(o\) along with the prompt \(q\) to predict the \(t^{th}\) token, denoted by \(o_t\). For simplicity, we assume each word is a token.</p>
+<p>is determined by a neural network (typically based on the transformer architecture). The network takes in the prompt \(q\) along with the previously generated tokens \(o_{&lt;t}\) to predict the \(t^{th}\) token, \(o_t\). For simplicity, we assume each word is treated as a token.</p>
 
-<p>Given a prompt \(q\) such as “What is the capital of France?”, the policy model \(\pi_\theta\) begins by predicting the first token \(o_1\), which could be “The”. The model then generates subsequent tokens based on the prompt and the previously generated tokens. The ratio</p>
+<p>For example, given a prompt such as “What is the capital of France?”, the model might predict \(o_1\) as “The” and continue generating subsequent tokens based on the context. The ratio</p>
 
 \[\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})}\]
 
-<p>measures how much more likely the new policy is to predict the token \(o_t\) compared to the old policy. This ratio acts as a weight for the advantage \(A_t\), which we elaborate on next.</p>
+<p>measures how much more likely the new policy is to predict the token \(o_t\) compared to the old policy. This ratio acts as a weight for the advantage \(A_t\), which is defined as</p>
 
-<p>For PPO, the advantage \(A_t\) can be expressed as</p>
+\[A_t = \sum_{l=0}^{T-t-1} (\gamma \lambda)^l \left[ Q(s_{t+l}, o_{t+l}) - V(s_{t+l}) \right].\]
 
-\[A_t = \sum_{l=0}^{T-t-1} (\gamma \lambda)^l \left[ Q(s_{t+l}, o_{t+l}) - V(s_{t+l}) \right]\]
+<p>Here, \(Q(s_t, o_t)\) represents the cumulative reward after choosing \(o_t\), and in practice, we approximate it as</p>
 
-<p>Here, \(Q(s_t, o_t)\) represents the cumulative reward after outputting \(o_t\). It is the sum of the immediate reward for predicting that token, denoted by \(r_t\), and the discounted sum of future rewards determined by the value network. In practice, we approximate</p>
+\[Q(s_t, o_t) \approx r_t + \gamma\, V(s_{t+1}).\]
 
-\[Q(s_t, o_t) \approx r_t + \gamma\, V(s_{t+1})\]
+<p>Thus, the temporal-difference error becomes</p>
 
-<p>Thus, the temporal-difference error is given by</p>
-
-\[\delta_t = Q(s_t, o_t) - V(s_t) = r_t + \gamma\, V(s_{t+1}) - V(s_t)\]
+\[\delta_t = Q(s_t, o_t) - V(s_t) = r_t + \gamma\, V(s_{t+1}) - V(s_t).\]
 
 <p>The value network itself is trained using the loss function:</p>
 
 \[L_V = \frac{1}{2}\,\mathbb{E}_t\left[\left(V_\psi(s_t)-R_t\right)^2\right],\]
 
-<p>where \(R_t\) is the true expected sum of the discounted future rewards:</p>
+<p>where the true expected sum of discounted rewards is given by</p>
 
 \[R_t = r_t + \gamma\, r_{t+1} + \gamma^2\, r_{t+2} + \cdots + \gamma^{T-t}\, r_T.\]
 
-<p>From these definitions, the advantage quantifies the difference between the cumulative reward received for the current action (which in the case of NLP is the token generated) and the reward that was expected according to the value network. A positive advantage means that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
+<p>From these definitions, the advantage quantifies the difference between the cumulative reward received for the current action (in NLP, the token generated) and the reward that was expected according to the value network. A positive advantage implies that the token performed better than expected, while a negative advantage indicates it performed worse.</p>
 
-<p>Intuitively, having a positive advantage implies that the policy is outputting a better token than expected, which is what we want to optimize. Returning to our PPO equation, the advantage is used in two terms:</p>
+<p>The PPO objective uses the advantage in two terms:</p>
 
 <ul>
   <li>
@@ -401,18 +399,18 @@ J_{\text{PPO}}(\theta)
 
 \[\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})} A_t,\]
 
-    <p>ensures that the new policy does not deviate too much from the old policy, preserving the beneficial properties of the old policy.</p>
+    <p>ensures that the new policy does not deviate too much from the old policy, preserving beneficial behaviors.</p>
   </li>
   <li>
     <p>The second term,</p>
 
 \[\text{clip}\!\left(\frac{\pi_\theta(o_t \mid q, o_{&lt;t})}{\pi_{\theta}^{\text{old}}(o_t \mid q, o_{&lt;t})},\, 1-\epsilon,\, 1+\epsilon\right) A_t,\]
 
-    <p>prevents any single token from being overly rewarded by capping the ratio, ensuring that updates remain stable and do not lead to drastic changes.</p>
+    <p>prevents any single token from being overly rewarded by capping the ratio, ensuring stable updates.</p>
   </li>
 </ul>
 
-<p>Together, these terms form the PPO surrogate objective, which trains the network to optimize the cumulative reward for the next token while enforcing constraints that prevent large deviations from the previous policy. We can next move on to describe Group Relative Policy Optimization (GRPO) which was introduced by DeepSeek in their DeepSeekMath paper and how it improves upon PPO.</p>
+<p>Together, these terms form the PPO surrogate objective, which trains the network to optimize cumulative rewards while enforcing constraints to prevent large deviations from the previous policy.</p>
 
 <h2 id="group-relative-policy-optimization">Group Relative Policy Optimization</h2>
 
@@ -439,18 +437,90 @@ J_{\text{PPO}}(\theta)
 \Biggr]
 \end{aligned}\]
 
-<p>From the equation above we can see some differences compared to the PPO objective.  There is an additional sum across \(G\) actions \(o_i\) drawn from the old policy denoted by</p>
+<p>In this objective, we notice several key differences compared to PPO:</p>
 
-\[\{ o_i \}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)\]
+<ol>
+  <li>
+    <p><strong>Group Summation:</strong><br />
+Instead of evaluating a single output, GRPO considers a group of \(G\) outputs, sampled as<br />
+\(\{ o_i \}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q).\)</p>
+  </li>
+  <li>
+    <p><strong>KL Divergence Penalty:</strong><br />
+An explicit KL divergence term is included to measure the difference between the new policy and a reference policy:</p>
 
-<p>which is also expressed as a summation over \(G\) in the equation. There is also an additional KL divergence term \(D_{KL}\) which is measures the difference in policy distribution between the new policy and a reference policy, where</p>
+\[D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr] = \frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
+- \log \frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
+- 1,\]
 
-\[D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]
-\;=\;
-\frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
-\;-\;
-\log \frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
-\;-\;1.\]]]></content><author><name></name></author><category term="machine-learning" /><category term="reinforcement-learning" /><category term="python" /><category term="llms" /><category term="generative ai" /><summary type="html"><![CDATA[When we first think of reinforcement learning in the context of machine learning, we usually think of a grid with a start and end point. This is the standard reinforcement learning problem of teaching an agent to reach its goal using a clearly defined reward function. While reinforcement learning techniques have been existed for decades, its use for natural language processing (NLP) is fairly more recent, with arguably the most successful use case being to train ChatGPT. It is due to the lack of a clear reward that has led to this time gap between the formulation of such methods and its use to train language models. OpenAI solved this gap in part due to the power of belief and capitalism. The belief that such models can scale, and the capital from investors(at a scale largley unavailable to academics) to hire human evaluators to label data that it would eventually be used in its now well known reinforcement learning with human feedback (RLHF) algorithm.]]></summary></entry><entry><title type="html">Decision Tree Regressors</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Decision Tree Regressors" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>Most people practicing data science would be aware of tree based learning methods like XGBoost.
+    <p>with \(\beta\) controlling its influence. This term prevents the new policy from straying too far from a fixed reference.</p>
+  </li>
+  <li>
+    <p><strong>Group-Based Advantage:</strong><br />
+Instead of relying on a value network, GRPO computes a relative advantage for each output:</p>
+
+\[\hat{A}_{i,t} = \frac{r_i - \mu}{\sigma},\]
+
+    <p>where \(\mu\) and \(\sigma\) are the mean and standard deviation of rewards across the group. This normalization compensates for the absence of a traditional value network.</p>
+  </li>
+</ol>
+
+<h3 id="technical-differences-between-ppo-and-grpo">Technical Differences Between PPO and GRPO</h3>
+
+<ol>
+  <li><strong>Value Network vs. Group-Based Advantage:</strong>
+    <ul>
+      <li><strong>PPO:</strong> Uses a separate value network \(V(s_t)\) to compute a baseline via TD errors, stabilizing advantage estimates.</li>
+      <li><strong>GRPO:</strong> Eliminates the value network, computing advantages by comparing multiple outputs for the same prompt and normalizing via group statistics.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Reward Assignment:</strong><br />
+In many LLM applications, rewards are sparse and typically assigned only to the final token or overall output. PPO’s token-level value estimation can struggle in this setting, whereas GRPO leverages group comparisons to compute a robust, relative advantage.</p>
+  </li>
+  <li><strong>Explicit KL Divergence Penalty:</strong>
+    <ul>
+      <li><strong>PPO:</strong> Uses a clipping mechanism to limit policy updates.</li>
+      <li><strong>GRPO:</strong> In addition to clipping, it includes an explicit KL divergence penalty</li>
+    </ul>
+
+\[-\beta\,D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr],\]
+
+    <p>which directly penalizes deviations from a reference policy.</p>
+  </li>
+  <li><strong>Stability Considerations:</strong><br />
+The group-based normalization and KL penalty in GRPO work together to maintain stable policy updates, compensating for the absence of a traditional critic (value network).</li>
+</ol>
+
+<h2 id="summary">Summary</h2>
+
+<ul>
+  <li><strong>PPO</strong> relies on a value network to estimate cumulative rewards and computes the advantage using temporal-difference errors and a clipping mechanism.</li>
+  <li>
+    <p><strong>GRPO</strong> removes the value network by computing advantages based on group comparisons of multiple outputs for the same prompt. The group-based advantage is normalized as:</p>
+
+\[\hat{A}_{i,t} = \frac{r_i - \mu}{\sigma},\]
+
+    <p>and an explicit KL divergence penalty</p>
+
+\[-\beta\,D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]\]
+
+    <p>is used to ensure that the new policy remains close to a frozen reference policy.</p>
+  </li>
+</ul>
+
+<p>These modifications in GRPO address challenges in NLP—such as sparse rewards and instability in token-level value estimation—resulting in more stable policy updates without the need for a separate critic.</p>
+
+<p>This detailed explanation highlights the technical differences between PPO and GRPO and clarifies how GRPO adapts reinforcement learning to the unique challenges of training large language models.</p>
+
+<h2 id="references">References</h2>
+
+<ol>
+  <li>Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>. MIT Press. <a href="http://incompleteideas.net/book/the-book.html">Link</a></li>
+  <li>OpenAI. (2019). <em>Better Language Models and Their Implications</em>. <a href="https://openai.com/blog/better-language-models/">Link</a></li>
+  <li>OpenAI. (2021). <em>OpenAI Codex</em>. <a href="https://openai.com/blog/openai-codex/">Link</a></li>
+  <li>Ouyang, L., Wu, J., Jiang, X., et al. (2022). Training language models to follow instructions with human feedback. arXiv preprint arXiv:2203.02155. <a href="https://arxiv.org/abs/2203.02155">Link</a></li>
+</ol>]]></content><author><name></name></author><category term="machine-learning" /><category term="reinforcement-learning" /><category term="python" /><category term="llms" /><category term="generative ai" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Decision Tree Regressors</title><link href="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html" rel="alternate" type="text/html" title="Decision Tree Regressors" /><published>2024-12-20T00:00:00+08:00</published><updated>2024-12-20T00:00:00+08:00</updated><id>http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor</id><content type="html" xml:base="http://localhost:4000/machine-learning/regression/2024/12/20/decision-tree-regressor.html"><![CDATA[<p>Most people practicing data science would be aware of tree based learning methods like XGBoost.
 Despite LLMs occupying the current spotlight, these tree based methods are still widely used and even <a href="https://arxiv.org/pdf/2207.08815">outperform neural networks</a> when dealing with tabular/structured data.</p>
 
 <p>Neural networks, while powerful in their own right, excel at modelling unstructured data through their architecture, be it positional encoding + self-attention for seq2seq models or convolutions for images.
@@ -472,11 +542,11 @@ Tabular data still forms a large part of most companies’ data source and build
 
 \[f(x&lt;n) = mean(y\mid x &lt;n)\]
 
-<p><img src="/images/binarytree.jpg" alt="Alt text" /></p>
+<p><img src="/images/decision_tree/binarytree.jpg" alt="Alt text" /></p>
 
 <p>This can also be illustrated with the binary tree above, where the threshold n=0. If \(x\) is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: \(y = \frac{1}{1 + e^{-x}}\).</p>
 
-<p><img src="/images/scatter.jpg" alt="An example image" /></p>
+<p><img src="/images/decision_tree/scatter.jpg" alt="An example image" /></p>
 
 <p>From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth=1 we can see a threshold at \(x=0\) and gradually see our model increasingly fit the sigmoid function with increasing depth.</p>
 

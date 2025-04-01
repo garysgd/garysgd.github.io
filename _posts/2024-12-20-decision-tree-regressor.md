@@ -29,11 +29,11 @@ We can extend this further to apply thresholds at certain values of $$x$$ where
 
 $$f(x<n) = mean(y\mid x <n)$$
 
-![Alt text](/images/binarytree.jpg)
+![Alt text](/images/decision_tree/binarytree.jpg)
 
 This can also be illustrated with the binary tree above, where the threshold n=0. If $$x$$ is less than 0, the model predicts y=0.15 and it predicts y=0.85 for any value greater or equal to 0. The binary tree above shows one threshold value with depth=1. We can illustrate this example more clearly when fitting a decision tree regressor of various depths to a sigmoid function: $$y = \frac{1}{1 + e^{-x}}$$.
 
-![An example image](/images/scatter.jpg)
+![An example image](/images/decision_tree/scatter.jpg)
 
 From the image above we can see how well our decision tree regressor fits the sigmoid function at various depths of the tree. Depth=0 is denoted by the green line where we naively assume that any value x will approximate the mean of y. For depth=1 we can see a threshold at $$x=0$$ and gradually see our model increasingly fit the sigmoid function with increasing depth.
 
