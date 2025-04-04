@@ -3,9 +3,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>GRPO: How DeepSeek Created Value Without Value | if: Learn</title>
+<title>Advances in Reinforcement Learning for NLP | if: Learn</title>
 <meta name="generator" content="Jekyll v4.3.3" />
-<meta property="og:title" content="GRPO: How DeepSeek Created Value Without Value" />
+<meta property="og:title" content="Advances in Reinforcement Learning for NLP" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Exploring Machine Learning and Theoretical Work Gary Phua" />
 <meta property="og:description" content="Exploring Machine Learning and Theoretical Work Gary Phua" />
@@ -15,9 +15,9 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2025-02-12T00:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="GRPO: How DeepSeek Created Value Without Value" />
+<meta property="twitter:title" content="Advances in Reinforcement Learning for NLP" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-12T00:00:00+08:00","datePublished":"2025-02-12T00:00:00+08:00","description":"Exploring Machine Learning and Theoretical Work Gary Phua","headline":"GRPO: How DeepSeek Created Value Without Value","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"},"url":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-12T00:00:00+08:00","datePublished":"2025-02-12T00:00:00+08:00","description":"Exploring Machine Learning and Theoretical Work Gary Phua","headline":"Advances in Reinforcement Learning for NLP","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"},"url":"http://localhost:4000/machine-learning/reinforcement-learning/2025/02/12/grpo.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="if: Learn" /><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"></script>
 
@@ -45,7 +45,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>GRPO: How DeepSeek Created Value Without Value</title>
+    <title>Advances in Reinforcement Learning for NLP</title>
 
     <!-- If you want custom highlighting, link it here or in default.html -->
     <link rel="stylesheet" href="/assets/css/custom-highlight.css">
@@ -61,7 +61,7 @@
     <article class="post">
       <!-- Title or other info if needed -->
       <header class="post-header">
-        <h1>GRPO: How DeepSeek Created Value Without Value</h1>
+        <h1>Advances in Reinforcement Learning for NLP</h1>
       </header>
 
       <div class="post-content">
@@ -69,11 +69,11 @@
   <img src="/images/grpo/grpo1.png" alt="Grid World Image" width="300" />
 </p>
 
-<p>When we first think of reinforcement learning, we often imagine a grid with a start and an endpoint—a classic setup where an agent learns to reach its goal using a clearly defined reward function. Although reinforcement learning techniques have been studied since the 1970s [1], their application in Natural Language Processing (NLP) is much more recent. Perhaps the most successful example of this is OpenAI’s training of ChatGPT. But what is the reward when dealing with language?</p>
+<p>When we first think of reinforcement learning, we often imagine a grid with a start and an endpoint, a classic setup where an agent learns to reach its goal using a clearly defined reward function. Although reinforcement learning techniques have existed for some time [1], their application in Natural Language Processing (NLP) is much more recent. Perhaps the most successful example of this is OpenAI’s training of ChatGPT. But what is the reward when dealing with language?</p>
 
-<p>Every technological leap in human history has required a successful marriage between theory and experiment, software and hardware. In machine learning, this came in the form of the backpropagation algorithm combined with GPU hardware that could perform massive parallel computations efficiently. When combining NLP with reinforcement learning, there is an essential third element: data.</p>
+<p>Every technological leap in human history has required a successful marriage between theory and experiment, software and hardware. In machine learning, this came in the form of the backpropagation algorithm combined with GPU hardware that could perform massive parallel computations efficiently. When combining NLP with reinforcement learning, there is an essential third element: Data.</p>
 
-<p>With trillions of words available on the internet, one might assume that data would never be a bottleneck for training language models. However, it is the quality and usefulness of that text which ultimately determine a model’s performance. Before OpenAI popularized the approach, NLP researchers devised an ingenious method: they used an autoregressive technique known as next token prediction. In the absence of a well-defined reward in language, the model was “rewarded” simply for correctly predicting the next token. This approach enabled the creation of AI models that could generate text reminiscent of Shakespeare [2] or even write code [3]. Although these models are essentially next token predictors, training them in this way allows them to learn deep semantic structures in language.</p>
+<p>With trillions of words available on the internet, it is natural to assume that data would never be a bottleneck for training language models. However, it is the quality and usefulness of that text which ultimately determine a model’s performance. Before OpenAI popularized the approach, NLP researchers devised an ingenious method: they used an autoregressive technique known as next token prediction. In the absence of a well-defined reward in language, the model was “rewarded” simply for correctly predicting the next token. This approach enabled the creation of AI models that could generate text reminiscent of Shakespeare [2] or even write code [3]. Although these models are essentially next token predictors, training them in this way allows them to learn deep semantic structures in language.</p>
 
 <p align="center">
   <img src="/images/grpo/grpo2.png" alt="Murder Mystery" width="350" />
@@ -81,13 +81,13 @@
 
 <p>Ilya Sutskever has even proposed a thought experiment to illustrate the power of next token prediction. Imagine someone reading a murder mystery who has read every sentence except the last one—the sentence that reveals the murderer. Replacing the reader with a well-trained next token predictor, the model would be able to guess the murderer correctly, suggesting that it has captured a non-trivial understanding of language.</p>
 
-<p>OpenAI addressed these challenges partly through the power of belief and capitalism. The belief that larger models perform better, combined with significant investment capital (at a scale largely unavailable to academics), allowed OpenAI to hire human evaluators to label data. This labeled data was then used in the well-known Reinforcement Learning with Human Feedback (RLHF) training step. With a large amount of high-quality labeled data, they were able to fine-tune a pretrained transformer in two stages.</p>
+<p>OpenAI addressed these challenges partly through the power of belief and capitalism. The belief that larger models perform better, combined with significant investment capital (at a scale largely unavailable to academia), allowed OpenAI to hire human evaluators to label data [4]. This labeled data was then used in the well-known Reinforcement Learning with Human Feedback (RLHF) training step. With a large amount of high-quality labeled data, they were able to fine-tune a pretrained transformer in two stages.</p>
 
-<p>The first stage, <strong>instruction fine-tuning</strong>, involved training the model on a dataset of instruction–response pairs. In this phase, the model learns to follow human instructions by mapping prompts to desired outputs—essentially mimicking the behavior captured in the labeled data. This stage aligns the model’s outputs more closely with human expectations and provides a strong initialization for the next phase.</p>
+<p>The first stage, <strong>instruction fine-tuning</strong>, involved training the model on a dataset of instruction–response pairs [4]. In this phase, the model learns to follow human instructions by mapping prompts to desired outputs—essentially mimicking the behavior captured in the labeled data. This stage aligns the model’s outputs more closely with human expectations and provides a strong initialization for the next phase.</p>
 
-<p>The second stage, <strong>RLHF</strong>, applies reinforcement learning to further refine the model’s behavior. Here, a reward model—trained from human feedback—evaluates the model’s outputs, and the policy is updated to maximize the expected cumulative reward. This step ensures that the model’s responses are not only correct but also aligned with human preferences in terms of clarity, helpfulness, and safety.</p>
+<p>The second stage, <strong>RLHF</strong>, applies reinforcement learning to further refine the model’s behavior. Here, a reward model—trained from human feedback—evaluates the model’s outputs, and the policy is updated to maximize the expected cumulative reward. This step ensures that the model’s responses are not only correct but also aligned with human preferences in terms of clarity, helpfulness, and safety [4].</p>
 
-<p>Together, these stages enable modern large language models (LLMs) like ChatGPT to generate high-quality, human-aligned outputs. The RLHF stage, in particular, leverages reinforcement learning to fine-tune the model’s policy using advanced techniques such as Proximal Policy Optimization (PPO) and, more recently, Group Relative Policy Optimization (GRPO). GRPO removes the need for a separate critic network by computing advantages based on group comparisons among multiple outputs and by applying an explicit KL divergence penalty to stabilize policy updates.</p>
+<p>Together, these stages enable modern large language models (LLMs) like ChatGPT to generate high-quality, human-aligned outputs. The RLHF stage, uses reinforcement learning to fine-tune the model’s policy using advanced techniques such as Proximal Policy Optimization (PPO) and, more recently, Group Relative Policy Optimization (GRPO) [5]. GRPO removes the need for a separate value network by computing advantages based on group comparisons among multiple outputs and by applying an explicit KL divergence penalty to stabilize policy updates.</p>
 
 <p>In this post, I will first introduce the various reinforcement learning notations used in the context of NLP, followed by a discussion of the classic PPO objective and then an explanation of GRPO as introduced by DeepSeek in their DeepSeekMath paper.</p>
 
@@ -206,8 +206,9 @@ J_{\text{PPO}}(\theta)
 <ol>
   <li>
     <p><strong>Group Summation:</strong><br />
-Instead of evaluating a single output, GRPO considers a group of \(G\) outputs, sampled as<br />
-\(\{ o_i \}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q).\)</p>
+Instead of evaluating a single output, GRPO considers a group of outputs, sampled \(G\) times from the old policy as:</p>
+
+\[\{ o_i \}_{i=1}^{G} \sim \pi_{\theta}^{\text{old}}(\cdot \mid q)\]
   </li>
   <li>
     <p><strong>KL Divergence Penalty:</strong><br />
@@ -217,7 +218,7 @@ An explicit KL divergence term is included to measure the difference between the
 - \log \frac{\pi_{\mathrm{ref}}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}{\pi_{\theta}\bigl(o_{i,t} \mid q,\,o_{i,&lt;t}\bigr)}
 - 1,\]
 
-    <p>with \(\beta\) controlling its influence. This term prevents the new policy from straying too far from a fixed reference.</p>
+    <p>with \(\beta\) controlling its influence. This term prevents the new policy from straying too far from a reference policy, which provides stability in training in absence of the value network.</p>
   </li>
   <li>
     <p><strong>Group-Based Advantage:</strong><br />
@@ -225,7 +226,7 @@ Instead of relying on a value network, GRPO computes a relative advantage for ea
 
 \[\hat{A}_{i,t} = \frac{r_i - \mu}{\sigma},\]
 
-    <p>where \(\mu\) and \(\sigma\) are the mean and standard deviation of rewards across the group. This normalization compensates for the absence of a traditional value network.</p>
+    <p>where \(\mu\) and \(\sigma\) are the mean and standard deviation of rewards across the group. This normalization of the reward is used in place of a traditional value network, each \(i^{th}\) term is the reward calculated from sampling the policy network.</p>
   </li>
 </ol>
 
@@ -258,32 +259,29 @@ The group-based normalization and KL penalty in GRPO work together to maintain s
 
 <h2 id="summary">Summary</h2>
 
-<ul>
-  <li><strong>PPO</strong> relies on a value network to estimate cumulative rewards and computes the advantage using temporal-difference errors and a clipping mechanism.</li>
-  <li>
-    <p><strong>GRPO</strong> removes the value network by computing advantages based on group comparisons of multiple outputs for the same prompt. The group-based advantage is normalized as:</p>
-
-\[\hat{A}_{i,t} = \frac{r_i - \mu}{\sigma},\]
-
-    <p>and an explicit KL divergence penalty</p>
-
-\[-\beta\,D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]\]
-
-    <p>is used to ensure that the new policy remains close to a frozen reference policy.</p>
-  </li>
-</ul>
-
-<p>These modifications in GRPO address challenges in NLP—such as sparse rewards and instability in token-level value estimation—resulting in more stable policy updates without the need for a separate critic.</p>
-
-<p>This detailed explanation highlights the technical differences between PPO and GRPO and clarifies how GRPO adapts reinforcement learning to the unique challenges of training large language models.</p>
+<p>The introduction of training on high quality labelled data at scale using PPO by OpenAI was the first step in developing the LLMs that we use today. Despite the usefulness of PPO, having to train both the policy and the value network is expensive, both in terms of compute time and ram usage. DeepSeek’s introduction of GRPO marks an important step towards the next chapter. By removing the value network while showing no noticeable drop in performance, GRPO is an algorithmic innovation that allows LLMs to train with less compute and in turn costs. They have also opensourced these models trained on GRPO in the form of DeepSeek V3 and R1. This will hopefully further accelerate and democratise the adoption of AI going forward.</p>
 
 <h2 id="references">References</h2>
 
 <ol>
-  <li>Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>. MIT Press. <a href="http://incompleteideas.net/book/the-book.html">Link</a></li>
-  <li>OpenAI. (2019). <em>Better Language Models and Their Implications</em>. <a href="https://openai.com/blog/better-language-models/">Link</a></li>
-  <li>OpenAI. (2021). <em>OpenAI Codex</em>. <a href="https://openai.com/blog/openai-codex/">Link</a></li>
-  <li>Ouyang, L., Wu, J., Jiang, X., et al. (2022). Training language models to follow instructions with human feedback. arXiv preprint arXiv:2203.02155. <a href="https://arxiv.org/abs/2203.02155">Link</a></li>
+  <li>
+    <p>Sutton, R. S., &amp; Barto, A. G. (2018). <em>Reinforcement Learning: An Introduction</em>. MIT Press. <a href="http://incompleteideas.net/book/the-book.html">Link</a></p>
+  </li>
+  <li>
+    <p>OpenAI. (2019). <em>Better Language Models and Their Implications</em>. <a href="https://openai.com/blog/better-language-models/">Link</a></p>
+  </li>
+  <li>
+    <p>OpenAI. (2021). <em>OpenAI Codex</em>. <a href="https://openai.com/blog/openai-codex/">Link</a></p>
+  </li>
+  <li>
+    <p>Ouyang, L., Wu, J., Jiang, X., et al. (2022). <em>Training language models to follow instructions with human feedback</em>. arXiv preprint arXiv:2203.02155. <a href="https://arxiv.org/abs/2203.02155">Link</a></p>
+  </li>
+  <li>
+    <p>Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Zhang, M., Li, Y., Wu, Y., &amp; Guo, D. (2024). <em>DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models</em>. arXiv preprint arXiv:2402.03300. <a href="https://arxiv.org/abs/2402.03300">Link</a></p>
+  </li>
+  <li>
+    <p>Huyen, Chip. (2023). <em>RLHF: Reinforcement Learning from Human Feedback</em>. <a href="https://huyenchip.com/2023/05/02/rlhf.html">Link</a></p>
+  </li>
 </ol>
 
       </div>

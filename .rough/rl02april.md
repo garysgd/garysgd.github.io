@@ -242,3 +242,27 @@ where $$\mu$$ is the mean reward and $$\sigma$$ is the standard deviation of rew
 - These modifications in GRPO address challenges in NLP such as sparse rewards and instability in token-level value estimation, resulting in more stable policy updates without requiring a separate critic.
 
 This detailed explanation highlights the technical differences between PPO and GRPO and clarifies how GRPO adapts reinforcement learning to the unique challenges of training large language models.
+
+
+
+{::comment}
+
+- **PPO** relies on a value network to estimate cumulative rewards and computes the advantage using temporal-difference errors and a clipping mechanism.
+- **GRPO** removes the value network by computing advantages based on group comparisons of multiple outputs for the same prompt. The group-based advantage is normalized as:
+  
+  $$
+  \hat{A}_{i,t} = \frac{r_i - \mu}{\sigma},
+  $$
+  
+  and an explicit KL divergence penalty
+  
+  $$
+  -\beta\,D_{\mathrm{KL}}\!\bigl[\pi_\theta \,\|\, \pi_{\mathrm{ref}}\bigr]
+  $$
+  
+  is used to ensure that the new policy remains close to a frozen reference policy.
+
+These modifications in GRPO address challenges in NLP—such as sparse rewards and instability in token-level value estimation—resulting in more stable policy updates without the need for a separate critic.
+
+This detailed explanation highlights the technical differences between PPO and GRPO and clarifies how GRPO adapts reinforcement learning to the unique challenges of training large language models.
+{:/comment}
